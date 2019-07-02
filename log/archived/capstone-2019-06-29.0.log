@@ -1,0 +1,417 @@
+2019-06-29 13:52:29,096 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting CapstoneApplication on manoj-PC with PID 7716 (C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone\target\classes started by manoj in C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone)
+2019-06-29 13:52:29,136 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-06-29 13:52:29,340 INFO org.springframework.boot.logging.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-06-29 13:52:29,340 INFO org.springframework.boot.logging.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-06-29 13:52:31,512 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-29 13:52:31,584 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 52ms. Found 0 repository interfaces.
+2019-06-29 13:52:32,729 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$d6c06769] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-29 13:52:33,567 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 13:52:34,121 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8081 (http)
+2019-06-29 13:52:34,152 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 13:52:34,152 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8081"]
+2019-06-29 13:52:34,192 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2019-06-29 13:52:34,192 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-06-29 13:52:34,212 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 13:52:34,642 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2019-06-29 13:52:34,642 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 5302 ms
+2019-06-29 13:52:35,116 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2019-06-29 13:52:37,271 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2019-06-29 13:52:37,715 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-06-29 13:52:37,995 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate Core {5.3.7.Final}
+2019-06-29 13:52:38,002 INFO org.hibernate.cfg.Environment [restartedMain] HHH000206: hibernate.properties not found
+2019-06-29 13:52:38,582 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [restartedMain] HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-06-29 13:52:39,014 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.Oracle12cDialect
+2019-06-29 13:52:39,504 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [byte[]] overrides previous : org.hibernate.type.BinaryType@a055d49
+2019-06-29 13:52:39,504 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[B] overrides previous : org.hibernate.type.BinaryType@a055d49
+2019-06-29 13:52:39,504 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [Byte[]] overrides previous : org.hibernate.type.WrapperBinaryType@3b79d0f3
+2019-06-29 13:52:39,504 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[Ljava.lang.Byte;] overrides previous : org.hibernate.type.WrapperBinaryType@3b79d0f3
+2019-06-29 13:52:39,928 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 13:52:40,414 WARN org.springframework.context.support.AbstractApplicationContext [restartedMain] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userDao': Unsatisfied dependency expressed through field 'passwordEncoder'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'org.springframework.security.crypto.password.PasswordEncoder' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2019-06-29 13:52:40,414 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [restartedMain] Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 13:52:40,424 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Shutdown initiated...
+2019-06-29 13:52:40,474 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Shutdown completed.
+2019-06-29 13:52:40,474 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Stopping service [Tomcat]
+2019-06-29 13:52:40,575 INFO org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener [restartedMain] 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-06-29 13:52:41,116 ERROR org.springframework.boot.SpringApplication [restartedMain] Application run failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userDao': Unsatisfied dependency expressed through field 'passwordEncoder'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'org.springframework.security.crypto.password.PasswordEncoder' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:596)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:90)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:374)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1378)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:575)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:846)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:863)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at com.project.capstone.CapstoneApplication.main(CapstoneApplication.java:12)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'org.springframework.security.crypto.password.PasswordEncoder' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1651)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1210)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1164)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:593)
+	... 24 common frames omitted
+2019-06-29 13:54:21,401 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting CapstoneApplication on manoj-PC with PID 3496 (C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone\target\classes started by manoj in C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone)
+2019-06-29 13:54:21,418 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-06-29 13:54:21,612 INFO org.springframework.boot.logging.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-06-29 13:54:21,613 INFO org.springframework.boot.logging.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-06-29 13:54:26,383 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-29 13:54:26,520 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 93ms. Found 0 repository interfaces.
+2019-06-29 13:54:28,689 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b5ee7e97] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-29 13:54:30,089 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 13:54:31,399 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8081 (http)
+2019-06-29 13:54:31,477 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 13:54:31,479 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8081"]
+2019-06-29 13:54:31,532 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2019-06-29 13:54:31,538 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-06-29 13:54:31,583 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 13:54:32,193 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2019-06-29 13:54:32,198 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 10584 ms
+2019-06-29 13:54:32,995 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2019-06-29 13:54:37,161 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2019-06-29 13:54:37,741 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-06-29 13:54:38,141 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate Core {5.3.7.Final}
+2019-06-29 13:54:38,147 INFO org.hibernate.cfg.Environment [restartedMain] HHH000206: hibernate.properties not found
+2019-06-29 13:54:38,992 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [restartedMain] HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-06-29 13:54:39,712 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.Oracle12cDialect
+2019-06-29 13:54:40,801 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [byte[]] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 13:54:40,803 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[B] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 13:54:40,805 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [Byte[]] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 13:54:40,807 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[Ljava.lang.Byte;] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 13:54:41,411 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 13:54:42,779 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-29 13:54:43,006 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-06-29 13:54:43,545 WARN org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration [restartedMain] Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-06-29 13:54:44,574 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4de1ffc0, org.springframework.security.web.context.SecurityContextPersistenceFilter@9b4a814, org.springframework.security.web.header.HeaderWriterFilter@36726f3b, org.springframework.security.web.csrf.CsrfFilter@5abd5331, org.springframework.security.web.authentication.logout.LogoutFilter@6dc42eb6, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@26063ea8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3cdb70c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7df3aa9d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@75487354, org.springframework.security.web.session.SessionManagementFilter@6df917f2, org.springframework.security.web.access.ExceptionTranslationFilter@2b802b35, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3b38a5cc]
+2019-06-29 13:54:44,986 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2019-06-29 13:54:45,220 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8081"]
+2019-06-29 13:54:45,318 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8081 (http) with context path ''
+2019-06-29 13:54:45,360 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started CapstoneApplication in 25.658 seconds (JVM running for 29.381)
+2019-06-29 13:56:36,268 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8081-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-06-29 13:56:36,278 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8081-exec-1] Initializing Servlet 'dispatcherServlet'
+2019-06-29 13:56:36,320 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8081-exec-1] Completed initialization in 42 ms
+2019-06-29 13:58:34,948 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [Thread-9] Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-29 13:58:34,952 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [Thread-9] Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 13:58:34,960 INFO com.zaxxer.hikari.HikariDataSource [Thread-9] HikariPool-1 - Shutdown initiated...
+2019-06-29 13:58:35,032 INFO com.zaxxer.hikari.HikariDataSource [Thread-9] HikariPool-1 - Shutdown completed.
+2019-06-29 13:58:37,389 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting CapstoneApplication on manoj-PC with PID 3496 (C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone\target\classes started by manoj in C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone)
+2019-06-29 13:58:37,399 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-06-29 13:58:38,180 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-29 13:58:38,200 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 20ms. Found 0 repository interfaces.
+2019-06-29 13:58:38,400 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b5ee7e97] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-29 13:58:38,551 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 13:58:38,711 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8081 (http)
+2019-06-29 13:58:38,711 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 13:58:38,711 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8081"]
+2019-06-29 13:58:38,711 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2019-06-29 13:58:38,711 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-06-29 13:58:38,711 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 13:58:38,786 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2019-06-29 13:58:38,788 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1388 ms
+2019-06-29 13:58:39,012 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-2 - Starting...
+2019-06-29 13:58:39,075 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-2 - Start completed.
+2019-06-29 13:58:39,205 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-06-29 13:58:39,297 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.Oracle12cDialect
+2019-06-29 13:58:39,406 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [byte[]] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 13:58:39,408 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[B] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 13:58:39,409 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [Byte[]] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 13:58:39,413 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[Ljava.lang.Byte;] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 13:58:39,453 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 13:58:40,045 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-29 13:58:40,075 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-06-29 13:58:40,205 WARN org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration [restartedMain] Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-06-29 13:58:40,395 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1ae106b1, org.springframework.security.web.context.SecurityContextPersistenceFilter@403c385a, org.springframework.security.web.header.HeaderWriterFilter@5bd3fe29, org.springframework.security.web.csrf.CsrfFilter@5d95e702, org.springframework.security.web.authentication.logout.LogoutFilter@53890dd3, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@72560110, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3e0239df, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7a64aa80, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2a547fa6, org.springframework.security.web.session.SessionManagementFilter@32e374f3, org.springframework.security.web.access.ExceptionTranslationFilter@2eca015b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@33bb7a68]
+2019-06-29 13:58:40,465 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2019-06-29 13:58:40,534 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8081"]
+2019-06-29 13:58:40,554 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8081 (http) with context path ''
+2019-06-29 13:58:40,554 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started CapstoneApplication in 3.335 seconds (JVM running for 264.578)
+2019-06-29 13:58:40,564 INFO org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener [restartedMain] Condition evaluation unchanged
+2019-06-29 14:02:45,774 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [Thread-15] Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-29 14:02:45,784 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [Thread-15] Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 14:02:45,784 INFO com.zaxxer.hikari.HikariDataSource [Thread-15] HikariPool-2 - Shutdown initiated...
+2019-06-29 14:02:45,825 INFO com.zaxxer.hikari.HikariDataSource [Thread-15] HikariPool-2 - Shutdown completed.
+2019-06-29 14:02:48,159 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting CapstoneApplication on manoj-PC with PID 3496 (C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone\target\classes started by manoj in C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone)
+2019-06-29 14:02:48,159 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-06-29 14:02:49,081 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-29 14:02:49,113 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 32ms. Found 0 repository interfaces.
+2019-06-29 14:02:49,375 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b5ee7e97] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-29 14:02:49,568 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:02:49,738 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8081 (http)
+2019-06-29 14:02:49,738 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:02:49,748 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8081"]
+2019-06-29 14:02:49,748 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2019-06-29 14:02:49,748 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-06-29 14:02:49,748 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:02:49,798 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2019-06-29 14:02:49,798 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1639 ms
+2019-06-29 14:02:49,948 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-3 - Starting...
+2019-06-29 14:02:50,008 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-3 - Start completed.
+2019-06-29 14:02:50,100 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-06-29 14:02:50,150 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.Oracle12cDialect
+2019-06-29 14:02:50,230 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [byte[]] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 14:02:50,230 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[B] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 14:02:50,230 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [Byte[]] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 14:02:50,230 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[Ljava.lang.Byte;] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 14:02:50,281 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 14:02:51,012 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-29 14:02:51,070 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-06-29 14:02:51,263 WARN org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration [restartedMain] Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-06-29 14:02:51,534 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@d966f34, org.springframework.security.web.context.SecurityContextPersistenceFilter@4dba81e9, org.springframework.security.web.header.HeaderWriterFilter@53e5f845, org.springframework.security.web.csrf.CsrfFilter@66dfcb52, org.springframework.security.web.authentication.logout.LogoutFilter@14b5a9de, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@d99d768, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@70c2961, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7bd7de15, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@27974714, org.springframework.security.web.session.SessionManagementFilter@55a74554, org.springframework.security.web.access.ExceptionTranslationFilter@70974d62, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6e665ea2]
+2019-06-29 14:02:51,646 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2019-06-29 14:02:51,706 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8081"]
+2019-06-29 14:02:51,726 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8081 (http) with context path ''
+2019-06-29 14:02:51,726 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started CapstoneApplication in 3.741 seconds (JVM running for 515.741)
+2019-06-29 14:02:51,726 INFO org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener [restartedMain] Condition evaluation unchanged
+2019-06-29 14:03:05,356 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [Thread-22] Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-29 14:03:05,366 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [Thread-22] Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 14:03:05,366 INFO com.zaxxer.hikari.HikariDataSource [Thread-22] HikariPool-3 - Shutdown initiated...
+2019-06-29 14:03:05,397 INFO com.zaxxer.hikari.HikariDataSource [Thread-22] HikariPool-3 - Shutdown completed.
+2019-06-29 14:03:08,059 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting CapstoneApplication on manoj-PC with PID 3496 (C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone\target\classes started by manoj in C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone)
+2019-06-29 14:03:08,059 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-06-29 14:03:08,790 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-29 14:03:08,810 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 20ms. Found 0 repository interfaces.
+2019-06-29 14:03:09,000 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b5ee7e97] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-29 14:03:09,140 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:03:09,361 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8081 (http)
+2019-06-29 14:03:09,371 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:03:09,371 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8081"]
+2019-06-29 14:03:09,371 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2019-06-29 14:03:09,371 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-06-29 14:03:09,371 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:03:09,431 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2019-06-29 14:03:09,431 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1372 ms
+2019-06-29 14:03:09,621 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-4 - Starting...
+2019-06-29 14:03:09,683 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-4 - Start completed.
+2019-06-29 14:03:09,803 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-06-29 14:03:09,885 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.Oracle12cDialect
+2019-06-29 14:03:09,941 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [byte[]] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 14:03:09,942 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[B] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 14:03:09,943 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [Byte[]] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 14:03:09,944 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[Ljava.lang.Byte;] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 14:03:09,990 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 14:03:10,450 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-29 14:03:10,491 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-06-29 14:03:10,693 WARN org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration [restartedMain] Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-06-29 14:03:10,977 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1444b463, org.springframework.security.web.context.SecurityContextPersistenceFilter@177ea340, org.springframework.security.web.header.HeaderWriterFilter@4fc4e4e1, org.springframework.security.web.csrf.CsrfFilter@5c17a7c4, org.springframework.security.web.authentication.logout.LogoutFilter@7b01ea53, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@190732d0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@55e4eb31, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3d6fee80, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2b270313, org.springframework.security.web.session.SessionManagementFilter@76b603d5, org.springframework.security.web.access.ExceptionTranslationFilter@254ce29c, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7e8062e2]
+2019-06-29 14:03:11,047 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2019-06-29 14:03:11,127 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8081"]
+2019-06-29 14:03:11,159 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8081 (http) with context path ''
+2019-06-29 14:03:11,164 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started CapstoneApplication in 3.264 seconds (JVM running for 535.175)
+2019-06-29 14:03:11,174 INFO org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener [restartedMain] Condition evaluation unchanged
+2019-06-29 14:14:25,539 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [Thread-29] Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-29 14:14:25,549 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [Thread-29] Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 14:14:25,549 INFO com.zaxxer.hikari.HikariDataSource [Thread-29] HikariPool-4 - Shutdown initiated...
+2019-06-29 14:14:25,580 INFO com.zaxxer.hikari.HikariDataSource [Thread-29] HikariPool-4 - Shutdown completed.
+2019-06-29 14:14:27,324 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting CapstoneApplication on manoj-PC with PID 3496 (C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone\target\classes started by manoj in C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone)
+2019-06-29 14:14:27,324 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-06-29 14:14:27,965 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-29 14:14:27,985 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 20ms. Found 0 repository interfaces.
+2019-06-29 14:14:28,205 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b5ee7e97] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-29 14:14:28,395 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:14:28,576 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8081 (http)
+2019-06-29 14:14:28,586 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:14:28,586 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8081"]
+2019-06-29 14:14:28,586 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2019-06-29 14:14:28,586 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-06-29 14:14:28,586 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:14:28,636 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2019-06-29 14:14:28,636 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1301 ms
+2019-06-29 14:14:28,756 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-5 - Starting...
+2019-06-29 14:14:28,806 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-5 - Start completed.
+2019-06-29 14:14:28,886 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-06-29 14:14:28,916 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.Oracle12cDialect
+2019-06-29 14:14:28,946 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [byte[]] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 14:14:28,946 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[B] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 14:14:28,946 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [Byte[]] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 14:14:28,946 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[Ljava.lang.Byte;] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 14:14:28,987 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 14:14:29,502 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-29 14:14:29,544 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-06-29 14:14:29,750 WARN org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration [restartedMain] Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-06-29 14:14:30,069 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@69893c7f, org.springframework.security.web.context.SecurityContextPersistenceFilter@7020f586, org.springframework.security.web.header.HeaderWriterFilter@2f388245, org.springframework.security.web.csrf.CsrfFilter@458e3047, org.springframework.security.web.authentication.logout.LogoutFilter@148c9d80, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@63f7d652, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7c9cfbf4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@17dd7488, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1798b147, org.springframework.security.web.session.SessionManagementFilter@4418e94a, org.springframework.security.web.access.ExceptionTranslationFilter@18b29056, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@35e7cac4]
+2019-06-29 14:14:30,166 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2019-06-29 14:14:30,226 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8081"]
+2019-06-29 14:14:30,246 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8081 (http) with context path ''
+2019-06-29 14:14:30,246 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started CapstoneApplication in 3.024 seconds (JVM running for 1214.254)
+2019-06-29 14:14:30,256 INFO org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener [restartedMain] Condition evaluation unchanged
+2019-06-29 14:14:57,961 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [Thread-36] Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-29 14:14:57,971 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [Thread-36] Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 14:14:57,971 INFO com.zaxxer.hikari.HikariDataSource [Thread-36] HikariPool-5 - Shutdown initiated...
+2019-06-29 14:14:58,002 INFO com.zaxxer.hikari.HikariDataSource [Thread-36] HikariPool-5 - Shutdown completed.
+2019-06-29 14:14:59,837 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting CapstoneApplication on manoj-PC with PID 3496 (C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone\target\classes started by manoj in C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone)
+2019-06-29 14:14:59,847 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-06-29 14:15:00,548 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-29 14:15:00,568 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 20ms. Found 0 repository interfaces.
+2019-06-29 14:15:00,708 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b5ee7e97] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-29 14:15:00,838 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:15:00,979 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8081 (http)
+2019-06-29 14:15:00,979 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:15:00,979 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8081"]
+2019-06-29 14:15:00,979 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2019-06-29 14:15:00,979 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-06-29 14:15:00,979 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:15:01,019 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2019-06-29 14:15:01,019 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1162 ms
+2019-06-29 14:15:01,189 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-6 - Starting...
+2019-06-29 14:15:01,269 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-6 - Start completed.
+2019-06-29 14:15:01,391 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-06-29 14:15:01,461 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.Oracle12cDialect
+2019-06-29 14:15:01,512 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [byte[]] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 14:15:01,514 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[B] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 14:15:01,516 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [Byte[]] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 14:15:01,517 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[Ljava.lang.Byte;] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 14:15:01,562 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 14:15:02,085 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-29 14:15:02,126 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-06-29 14:15:02,256 WARN org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration [restartedMain] Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-06-29 14:15:02,438 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@226f690b, org.springframework.security.web.context.SecurityContextPersistenceFilter@5781ca27, org.springframework.security.web.header.HeaderWriterFilter@3d2d2f8d, org.springframework.security.web.csrf.CsrfFilter@7baebba1, org.springframework.security.web.authentication.logout.LogoutFilter@3d72eea7, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@647bcbdc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@50bad7b6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@43fdb6b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@32883732, org.springframework.security.web.session.SessionManagementFilter@59fc110a, org.springframework.security.web.access.ExceptionTranslationFilter@3066eb5a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@47118ae5]
+2019-06-29 14:15:02,508 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2019-06-29 14:15:02,548 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8081"]
+2019-06-29 14:15:02,568 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8081 (http) with context path ''
+2019-06-29 14:15:02,568 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started CapstoneApplication in 2.905 seconds (JVM running for 1246.57)
+2019-06-29 14:15:02,568 INFO org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener [restartedMain] Condition evaluation unchanged
+2019-06-29 14:25:36,627 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [Thread-43] Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-29 14:25:36,627 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [Thread-43] Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 14:25:36,639 INFO com.zaxxer.hikari.HikariDataSource [Thread-43] HikariPool-6 - Shutdown initiated...
+2019-06-29 14:25:36,687 INFO com.zaxxer.hikari.HikariDataSource [Thread-43] HikariPool-6 - Shutdown completed.
+2019-06-29 14:25:38,839 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting CapstoneApplication on manoj-PC with PID 3496 (C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone\target\classes started by manoj in C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone)
+2019-06-29 14:25:38,839 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-06-29 14:25:39,469 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-29 14:25:39,489 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 10ms. Found 0 repository interfaces.
+2019-06-29 14:25:39,709 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b5ee7e97] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-29 14:25:39,859 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:25:40,010 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8081 (http)
+2019-06-29 14:25:40,010 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:25:40,010 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8081"]
+2019-06-29 14:25:40,010 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2019-06-29 14:25:40,010 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-06-29 14:25:40,010 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:25:40,060 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2019-06-29 14:25:40,060 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1221 ms
+2019-06-29 14:25:40,200 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-7 - Starting...
+2019-06-29 14:25:40,270 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-7 - Start completed.
+2019-06-29 14:25:40,392 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-06-29 14:25:40,455 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.Oracle12cDialect
+2019-06-29 14:25:40,486 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [byte[]] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 14:25:40,487 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[B] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 14:25:40,488 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [Byte[]] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 14:25:40,489 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[Ljava.lang.Byte;] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 14:25:40,535 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 14:25:41,098 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-29 14:25:41,119 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-06-29 14:25:41,249 WARN org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration [restartedMain] Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-06-29 14:25:41,420 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3b610400, org.springframework.security.web.context.SecurityContextPersistenceFilter@1cf02da, org.springframework.security.web.header.HeaderWriterFilter@343a55ac, org.springframework.security.web.csrf.CsrfFilter@28d9ee23, org.springframework.security.web.authentication.logout.LogoutFilter@2b35680e, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@52956660, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@29a6f82e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4f574f83, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6489c8f, org.springframework.security.web.session.SessionManagementFilter@668040df, org.springframework.security.web.access.ExceptionTranslationFilter@5c9e8bf6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@29a025ef]
+2019-06-29 14:25:41,490 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2019-06-29 14:25:41,530 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8081"]
+2019-06-29 14:25:41,550 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8081 (http) with context path ''
+2019-06-29 14:25:41,550 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started CapstoneApplication in 2.882 seconds (JVM running for 1885.544)
+2019-06-29 14:25:41,560 INFO org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener [restartedMain] Condition evaluation unchanged
+2019-06-29 14:32:30,406 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [Thread-50] Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-29 14:32:30,411 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [Thread-50] Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 14:32:30,414 INFO com.zaxxer.hikari.HikariDataSource [Thread-50] HikariPool-7 - Shutdown initiated...
+2019-06-29 14:32:30,480 INFO com.zaxxer.hikari.HikariDataSource [Thread-50] HikariPool-7 - Shutdown completed.
+2019-06-29 14:32:32,070 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting CapstoneApplication on manoj-PC with PID 3496 (C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone\target\classes started by manoj in C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone)
+2019-06-29 14:32:32,073 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-06-29 14:32:32,722 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-29 14:32:32,742 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 10ms. Found 0 repository interfaces.
+2019-06-29 14:32:32,892 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b5ee7e97] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-29 14:32:33,012 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:32:33,152 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8081 (http)
+2019-06-29 14:32:33,152 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:32:33,162 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8081"]
+2019-06-29 14:32:33,162 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2019-06-29 14:32:33,162 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-06-29 14:32:33,162 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:32:33,203 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2019-06-29 14:32:33,203 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1123 ms
+2019-06-29 14:32:33,343 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-8 - Starting...
+2019-06-29 14:32:33,403 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-8 - Start completed.
+2019-06-29 14:32:33,525 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-06-29 14:32:33,587 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.Oracle12cDialect
+2019-06-29 14:32:33,617 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [byte[]] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 14:32:33,617 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[B] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 14:32:33,627 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [Byte[]] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 14:32:33,627 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[Ljava.lang.Byte;] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 14:32:33,665 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 14:32:34,275 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-29 14:32:34,306 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-06-29 14:32:34,436 WARN org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration [restartedMain] Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-06-29 14:32:34,636 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@334e825d, org.springframework.security.web.context.SecurityContextPersistenceFilter@30ba77c4, org.springframework.security.web.header.HeaderWriterFilter@2130135e, org.springframework.security.web.csrf.CsrfFilter@679c1221, org.springframework.security.web.authentication.logout.LogoutFilter@16516685, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@753637dc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3ee153e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@22655cfe, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@404864f, org.springframework.security.web.session.SessionManagementFilter@37b07609, org.springframework.security.web.access.ExceptionTranslationFilter@50fc637e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6186cc0c]
+2019-06-29 14:32:34,706 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2019-06-29 14:32:34,746 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8081"]
+2019-06-29 14:32:34,766 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8081 (http) with context path ''
+2019-06-29 14:32:34,766 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started CapstoneApplication in 2.92 seconds (JVM running for 2298.75)
+2019-06-29 14:32:34,776 INFO org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener [restartedMain] Condition evaluation unchanged
+2019-06-29 14:34:41,110 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [Thread-57] Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-29 14:34:41,110 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [Thread-57] Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 14:34:41,110 INFO com.zaxxer.hikari.HikariDataSource [Thread-57] HikariPool-8 - Shutdown initiated...
+2019-06-29 14:34:41,141 INFO com.zaxxer.hikari.HikariDataSource [Thread-57] HikariPool-8 - Shutdown completed.
+2019-06-29 14:34:45,524 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Starting CapstoneApplication on manoj-PC with PID 3496 (C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone\target\classes started by manoj in C:\Users\manoj\Documents\workspace-sts-3.9.4.RELEASE\capstone)
+2019-06-29 14:34:45,526 INFO org.springframework.boot.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2019-06-29 14:34:46,933 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-29 14:34:46,975 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 40ms. Found 0 repository interfaces.
+2019-06-29 14:34:47,377 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b5ee7e97] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-29 14:34:47,869 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:34:48,205 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8081 (http)
+2019-06-29 14:34:48,209 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:34:48,211 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8081"]
+2019-06-29 14:34:48,213 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2019-06-29 14:34:48,215 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-06-29 14:34:48,217 ERROR org.apache.juli.logging.DirectJDKLog [restartedMain] An incompatible version [1.1.33] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-06-29 14:34:48,296 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2019-06-29 14:34:48,297 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 2754 ms
+2019-06-29 14:34:48,537 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-9 - Starting...
+2019-06-29 14:34:48,645 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-9 - Start completed.
+2019-06-29 14:34:48,801 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-06-29 14:34:48,855 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.Oracle12cDialect
+2019-06-29 14:34:48,893 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [byte[]] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 14:34:48,894 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[B] overrides previous : org.hibernate.type.BinaryType@50b24828
+2019-06-29 14:34:48,895 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [Byte[]] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 14:34:48,895 INFO org.hibernate.type.BasicTypeRegistry [restartedMain] HHH000270: Type registration [[Ljava.lang.Byte;] overrides previous : org.hibernate.type.WrapperBinaryType@4e304f0d
+2019-06-29 14:34:48,930 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-06-29 14:34:49,780 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-29 14:34:49,831 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-06-29 14:34:50,137 WARN org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration [restartedMain] Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-06-29 14:34:50,515 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@24f578a, org.springframework.security.web.context.SecurityContextPersistenceFilter@793fcb97, org.springframework.security.web.header.HeaderWriterFilter@76fd3200, org.springframework.security.web.csrf.CsrfFilter@745197a9, org.springframework.security.web.authentication.logout.LogoutFilter@5fdf5b24, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@583b403b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1e9eb2e4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@16cee05, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@56619529, org.springframework.security.web.session.SessionManagementFilter@12be8c4, org.springframework.security.web.access.ExceptionTranslationFilter@6b4190e4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7e7999e4]
+2019-06-29 14:34:50,652 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2019-06-29 14:34:50,751 INFO org.apache.juli.logging.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8081"]
+2019-06-29 14:34:50,770 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 8081 (http) with context path ''
+2019-06-29 14:34:50,772 INFO org.springframework.boot.StartupInfoLogger [restartedMain] Started CapstoneApplication in 7.451 seconds (JVM running for 2434.751)
+2019-06-29 14:34:50,781 INFO org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener [restartedMain] Condition evaluation unchanged
+2019-06-29 22:25:23,736 WARN com.zaxxer.hikari.pool.HikariPool$HouseKeeper [HikariPool-9 housekeeper] HikariPool-9 - Thread starvation or clock leap detected (housekeeper delta=7h50m32s308ms450µs789ns).
