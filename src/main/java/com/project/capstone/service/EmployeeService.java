@@ -28,8 +28,8 @@ public class EmployeeService {
 	public Optional<Employee> findEmployeeShifts(String id, LocalDate workingDate) {
 		return employeeDao.findEmployeeShifts(id,workingDate);
 	}
-	public List<Employee> findAllEmployeeShifts(LocalDate startDate, LocalDate endDate) {
-		return employeeDao.findAllEmployeeShifts(startDate, endDate);
+	public List<Employee> findAllEmployeesShifts(LocalDate startDate, LocalDate endDate) {
+		return employeeDao.findAllEmployeesShifts(startDate, endDate);
 	}
 	public Optional<Employee> findEmployeeShifts(String id, LocalDate startDate, LocalDate endDate) {
 		return employeeDao.findEmployeeShifts(id,startDate, endDate);

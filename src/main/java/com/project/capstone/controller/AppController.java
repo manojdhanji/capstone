@@ -52,10 +52,11 @@ public class AppController {
 		return shiftService.findShifts();
 	}
 	
-	@PatchMapping(path="/capstone/employee/clockout/{id}/{workingDate}/{shiftId}")
-	public ClockState clockOutEmployee(@PathVariable("id") String id, 
-										@PathVariable ("workingDate") String workingDate,
-											@PathVariable ("shiftId") int shiftId) {
+	@PatchMapping(path="/capstone/employees/{id}/clockout")
+	public ClockState clockOutEmployee(
+			@PathVariable("id") String id, 
+				@RequestParam ("workingDate") String workingDate,
+					@RequestParam ("shiftId") int shiftId) {
 		try {
 			LocalDateTime ldt= LocalDateTime.of(LocalDate.parse(workingDate, DateTimeFormatter.BASIC_ISO_DATE),
 													LocalTime.now());
@@ -76,10 +77,11 @@ public class AppController {
 		}
 	}
 	
-	@PostMapping(path="/capstone/employee/clockin/{id}/{workingDate}/{shiftId}")
-	public ClockState clockInEmployee(@PathVariable("id") String id, 
-										@PathVariable ("workingDate") String workingDate,
-											@PathVariable ("shiftId") int shiftId) {
+	@PostMapping(path="/capstone/employees/{id}/clockin")
+	public ClockState clockInEmployee(
+			@PathVariable("id") String id, 
+				@RequestParam ("workingDate") String workingDate,
+					@RequestParam ("shiftId") int shiftId) {
 		
 		try {
 			LocalDateTime ldt= LocalDateTime.of(LocalDate.parse(workingDate, DateTimeFormatter.BASIC_ISO_DATE),
@@ -105,11 +107,12 @@ public class AppController {
 		}
 	}
 	
-	@PostMapping(path="/capstone/employees/add")
-	public boolean addEmployee(@RequestParam("id") String id,
-								@RequestParam("firstName") String firstName,
-									@RequestParam("lastName") String lastName,
-										@RequestParam("email") String email) {
+	@PostMapping(path="/capstone/employees")
+	public boolean addEmployee(
+			@RequestParam("id") String id,
+				@RequestParam("firstName") String firstName,
+					@RequestParam("lastName") String lastName,
+						@RequestParam("email") String email) {
 		if(StringUtils.isNotBlank(id) && 
 				Constants.EMP_ID_REGEX.matcher(id).matches()) {
 			Employee e = new Employee();
@@ -135,7 +138,7 @@ public class AppController {
 				HttpStatus.EXPECTATION_FAILED,
 					MessageFormat.format("Employee ID does not match {0}",Constants.EMP_ID_REGEX), null);
 	}
-	@GetMapping(path="/capstone/employee/{id}")
+	@GetMapping(path="/capstone/employees/{id}")
 	public Employee getEmployee(@PathVariable("id") String id) {
 		log.info("id: {}",id);
 		Optional<Employee> optEmployee = Optional.<Employee>empty();
@@ -147,17 +150,24 @@ public class AppController {
 				HttpStatus.NOT_FOUND, "Employee Does Not Exist", null);
 	}
 	
-	@GetMapping(path="/capstone/employee/{id}/{startDate}/{endDate}")
-	public Employee getEmployeeShifts(@PathVariable("id") String id,
-										@PathVariable("startDate") String startDate,
-											@PathVariable("endDate") String endDate) {
+	@GetMapping(path="/capstone/employees/{id}/shifts")
+	public Employee getEmployeeShifts(
+			@PathVariable("id") String id,
+				@RequestParam("startDate") String startDate,
+					@RequestParam("endDate") Optional<String> optEndDate) {
 		
-		log.info("id: {} startDate: {} endDate: {}",id, startDate, endDate);
+		log.info("id: {} startDate: {} endDate: {}",id, startDate, optEndDate);
 		
 		try {
+			Optional<Employee> optEmployee = Optional.<Employee>empty();
 			LocalDate start = LocalDate.parse(startDate, DateTimeFormatter.BASIC_ISO_DATE);
-			LocalDate end = LocalDate.parse(endDate, DateTimeFormatter.BASIC_ISO_DATE);
-			Optional<Employee> optEmployee = employeeService.findEmployeeShifts(id, start, end);
+			if(optEndDate.isPresent()) {
+				LocalDate end = LocalDate.parse(optEndDate.get(), DateTimeFormatter.BASIC_ISO_DATE);
+				optEmployee = employeeService.findEmployeeShifts(id, start, end);
+			}
+			else
+				optEmployee = employeeService.findEmployeeShifts(id, start);
+			
 			if(optEmployee.isPresent()) {
 				return optEmployee.get();
 			}
@@ -175,47 +185,24 @@ public class AppController {
 		}
 	}
 	
-	@GetMapping(path="/capstone/employee/all/{startDate}/{endDate}")
-	public List<Employee> getAllEmployeeShifts(@PathVariable("startDate") String startDate,
-												@PathVariable("endDate") String endDate) {
+	@GetMapping(path="/capstone/employees/shifts")
+	public List<Employee> getAllEmployeesShifts(
+			@RequestParam("startDate") String startDate,
+				@RequestParam("endDate") String endDate) {
 
 		log.info("{} startDate: {} endDate: {}", startDate, endDate);
 
 		try {
 			LocalDate start = LocalDate.parse(startDate, DateTimeFormatter.BASIC_ISO_DATE);
 			LocalDate end = LocalDate.parse(endDate, DateTimeFormatter.BASIC_ISO_DATE);
-			return employeeService.findAllEmployeeShifts(start, end);
+			return employeeService.findAllEmployeesShifts(start, end);
 		}
 		catch(DateTimeParseException dtpe) {
 			throw new ResponseStatusException(
 					HttpStatus.EXPECTATION_FAILED, "Date must be in yyyyMMdd format", null);
 		}
 	}
-	
-	@GetMapping(path="/capstone/employee/{id}/{workingDate}")
-	public Employee getEmployeeShifts(@PathVariable("id") String id, 
-										@PathVariable("workingDate") String workingDate) {
-		
-		log.info("id: {} workingDate: {}",id, workingDate );
-		try {
-			LocalDate ld = LocalDate.parse(workingDate, DateTimeFormatter.BASIC_ISO_DATE);
-			Optional<Employee> optEmployee = employeeService.findEmployeeShifts(id, ld);
-			if(optEmployee.isPresent()) {
-				return optEmployee.get();
-			}
-			throw new ResponseStatusException(
-					HttpStatus.NOT_FOUND, "Employee Not Clocked In",null);
-		}
-		catch(DateTimeParseException dtpe) {
-			throw new ResponseStatusException(
-					HttpStatus.EXPECTATION_FAILED, "Date must be in yyyyMMdd format", null);
-		}
-		catch(NonExistentEntityException ndfe) {
-			throw new ResponseStatusException(
-					HttpStatus.NOT_FOUND, "Employee Does Not Exist (Referential Integrity Exception)", null);
-		}
-	}
-	
+
 	@GetMapping(path="/capstone/employees")
 	public List<Employee> getEmployees(){
 		return employeeService.getEmployees();

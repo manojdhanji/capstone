@@ -250,7 +250,7 @@ public class EmployeeDao extends AbstractDao {
     	return optEmployee;
     }
     @Transactional(transactionManager="oracleTransactionManager", readOnly=true)
-    public List<Employee> findAllEmployeeShifts(LocalDate startDate, LocalDate endDate){
+    public List<Employee> findAllEmployeesShifts(LocalDate startDate, LocalDate endDate){
     	List<Employee> employeeList = new ArrayList<>();
     	return 
     		jdbcTemplate
