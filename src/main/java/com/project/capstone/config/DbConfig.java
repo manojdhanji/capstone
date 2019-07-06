@@ -18,29 +18,6 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 public class DbConfig {
 	
-	/*@Bean(name="mssqlDataSourceProperties")
-	@Primary
-    @ConfigurationProperties("spring.mssql.datasource")
-    public DataSourceProperties mssqlDataSourceProperties() {
-        return new DataSourceProperties();
-    }
-	
-	@Bean(name = "mssqlDataSource", destroyMethod = "close")
-	@Primary
-	public DataSource mssqlDataSource(){
-		Map<String, Long> configMap = new HashMap<>();
-		configMap.put(MAX_POOL_SIZE,15L);
-		configMap.put(MINIMUM_IDLE,10L);
-		return createDataSource(mssqlDataSourceProperties(),configMap);
-	}
-	
-	@Bean(name="mssqlTransactionManager")
-	@Autowired
-	@Primary
-	DataSourceTransactionManager mssqlTransactionManager(@Qualifier ("mssqlDataSource") DataSource datasource) {
-		return new DataSourceTransactionManager(datasource);
-	}*/
-	
 	@Bean(name="oracleDataSourceProperties")
 	@Primary
     @ConfigurationProperties("spring.oracle.datasource")

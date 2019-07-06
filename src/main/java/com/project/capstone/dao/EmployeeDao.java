@@ -4,6 +4,7 @@ import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import com.project.capstone.exception.AddEmployeeException;
 import com.project.capstone.exception.ClockInException;
@@ -40,6 +42,10 @@ public class EmployeeDao extends AbstractDao {
 	
 	private static final String INSERT_EMP_DML = "insert into emp (emp_id, first_name, last_name, email) values (?,?,?,?)";
 	private static final String CLOCK_OUT_DML = "update emp_shift s set s.clock_out_time = ? where s.emp_id = ? and s.shift_id = ? and s.working_date = ?";
+	
+	private static final String GET_ALL_EMP_SHIFTS_FOR_GIVEN_DATES_SQL = 
+			"select s.*,e.first_name,e.last_name,e.email from emp_shift s inner join emp e on s.emp_id = e.emp_id where s.working_date between to_date(?,'YYYY-MM-DD') and to_date(?,'YYYY-MM-DD')";
+	
 	@Autowired
 	@Qualifier("oracleDataSource")
     private DataSource oracleDataSource;
@@ -233,5 +239,52 @@ public class EmployeeDao extends AbstractDao {
 								return e;	
 							}
 				);
+    }
+    
+    private Optional<Employee> getEmployeeFromCache(List<Employee> employeeList,String id){
+    	Optional<Employee> optEmployee = Optional.<Employee>empty();
+    	if(!CollectionUtils.isEmpty(employeeList) &&
+    			StringUtils.isNotBlank(id)) {
+    		optEmployee = employeeList.stream().filter(e->e.getEmpId().equals(id)).findFirst();
+    	}
+    	return optEmployee;
+    }
+    @Transactional(transactionManager="oracleTransactionManager", readOnly=true)
+    public List<Employee> findAllEmployeeShifts(LocalDate startDate, LocalDate endDate){
+    	List<Employee> employeeList = new ArrayList<>();
+    	return 
+    		jdbcTemplate
+    			.query(
+    				GET_ALL_EMP_SHIFTS_FOR_GIVEN_DATES_SQL,  
+    					new Object[] {startDate.format(DateTimeFormatter.ISO_LOCAL_DATE), 
+    									endDate.format(DateTimeFormatter.ISO_LOCAL_DATE)},
+	    				rs->
+	    				{
+	    					while(rs.next()) {
+	    						String id = rs.getString("emp_id");
+	    						Employee emp = null;
+	    						Optional<Employee> optEmployee = getEmployeeFromCache(employeeList,id);
+	    						if(!optEmployee.isPresent()) {
+	    							emp = new Employee();
+	    							emp.setEmpId(id);
+	    							emp.setFirstName(rs.getString("first_name"));
+	    							emp.setLastName(rs.getString("last_name"));
+									emp.setEmail(rs.getString("email"));
+									employeeList.add(emp);
+									optEmployee=getEmployeeFromCache(employeeList,id);
+	    						}
+	    						emp = optEmployee.get();
+	    						LocalDate workingDate = DateTimeUtils.convertDateToLocalDate(rs.getDate("working_date"));
+	    						Shift shift = new Shift();
+	    						shift.setShiftId(rs.getInt("shift_id"));
+	    						shift.setShiftStartTime(DateTimeUtils.getLocalTime(rs.getString("clock_in_time")));
+								shift.setShiftEndTime(DateTimeUtils.getLocalTime(rs.getString("clock_out_time")));	    						
+	    						emp.addShift(workingDate, shift);
+	    					}
+	    					return employeeList;
+	    				}
+    	);
+    	
+    	
     }
 }

@@ -11,9 +11,20 @@
       "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$Xa",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
       "sourceMethod": "public org.springframework.boot.autoconfigure.jdbc.DataSourceProperties.Xa getXa() "
+    },
+    {
+      "name": "spring.oracle.datasource.xa",
+      "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$Xa",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
+      "sourceMethod": "public org.springframework.boot.autoconfigure.jdbc.DataSourceProperties.Xa getXa() "
     }
   ],
   "properties": [
+    {
+      "name": "spring.oracle.datasource.continue-on-error",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
     {
       "name": "spring.oracle.datasource.continue-on-error",
       "type": "java.lang.Boolean",
@@ -25,7 +36,22 @@
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
     {
+      "name": "spring.oracle.datasource.data",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
       "name": "spring.oracle.datasource.data-password",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
+      "name": "spring.oracle.datasource.data-password",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
+      "name": "spring.oracle.datasource.data-username",
       "type": "java.lang.String",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
@@ -40,6 +66,16 @@
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
     {
+      "name": "spring.oracle.datasource.driver-class-name",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
+      "name": "spring.oracle.datasource.generate-unique-name",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
       "name": "spring.oracle.datasource.generate-unique-name",
       "type": "java.lang.Boolean",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
@@ -50,7 +86,22 @@
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
     {
+      "name": "spring.oracle.datasource.initialization-mode",
+      "type": "org.springframework.boot.jdbc.DataSourceInitializationMode",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
       "name": "spring.oracle.datasource.jndi-name",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
+      "name": "spring.oracle.datasource.jndi-name",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
+      "name": "spring.oracle.datasource.name",
       "type": "java.lang.String",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
@@ -65,6 +116,16 @@
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
     {
+      "name": "spring.oracle.datasource.password",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
+      "name": "spring.oracle.datasource.platform",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
       "name": "spring.oracle.datasource.platform",
       "type": "java.lang.String",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
@@ -75,7 +136,22 @@
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
     {
+      "name": "spring.oracle.datasource.schema",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
       "name": "spring.oracle.datasource.schema-password",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
+      "name": "spring.oracle.datasource.schema-password",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
+      "name": "spring.oracle.datasource.schema-username",
       "type": "java.lang.String",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
@@ -90,8 +166,23 @@
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
     {
+      "name": "spring.oracle.datasource.separator",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
       "name": "spring.oracle.datasource.sql-script-encoding",
       "type": "java.nio.charset.Charset",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
+      "name": "spring.oracle.datasource.sql-script-encoding",
+      "type": "java.nio.charset.Charset",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
+      "name": "spring.oracle.datasource.type",
+      "type": "java.lang.Class<? extends javax.sql.DataSource>",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
     {
@@ -105,6 +196,16 @@
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
     {
+      "name": "spring.oracle.datasource.url",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
+      "name": "spring.oracle.datasource.username",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
       "name": "spring.oracle.datasource.username",
       "type": "java.lang.String",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
@@ -112,6 +213,16 @@
     {
       "name": "spring.oracle.datasource.xa.data-source-class-name",
       "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$Xa"
+    },
+    {
+      "name": "spring.oracle.datasource.xa.data-source-class-name",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$Xa"
+    },
+    {
+      "name": "spring.oracle.datasource.xa.properties",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$Xa"
     },
     {

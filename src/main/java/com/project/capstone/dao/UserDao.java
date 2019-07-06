@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +22,8 @@ public class UserDao extends AbstractDao {
 	private static final String INSERT_USER_SQL = "insert into users (username, password) values (?,?)";
 	private static final String UPDATE_USER_SQL = "update users set password = ?, enabled = ? where username = ?";
 	private static final String GET_USER = "select u.*,r.role from users u left outer join user_roles r on u.username = r.username"; 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	/*@Autowired
+	private PasswordEncoder passwordEncoder;*/
 	
 	@Autowired
 	@Qualifier("oracleDataSource")
@@ -39,7 +38,7 @@ public class UserDao extends AbstractDao {
 	public int insertUser(String userName, Optional<String> optPassword) {
 		int rows = 0;
 		if(StringUtils.isNotBlank(userName)) {
-			String password = passwordEncoder.encode(optPassword.isPresent()?optPassword.get():Constants.PASSWORD);
+			String password = "";//passwordEncoder.encode(optPassword.isPresent()?optPassword.get():Constants.PASSWORD);
 			try {
 				rows = this.jdbcTemplate
 							.update(INSERT_USER_SQL, 
@@ -62,7 +61,7 @@ public class UserDao extends AbstractDao {
 			try {
 				rows = this.jdbcTemplate
 							.update(UPDATE_USER_SQL, 
-										new Object[] {passwordEncoder.encode(password), enabled?1:0, userName});
+										new Object[] {/*passwordEncoder.encode(password)*/password, enabled?1:0, userName});
 			}
 			catch(DataIntegrityViolationException e) {
 				log.error(e.getMostSpecificCause().getMessage());

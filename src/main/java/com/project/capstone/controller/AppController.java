@@ -95,6 +95,10 @@ public class AppController {
 			throw new ResponseStatusException(
 					HttpStatus.PRECONDITION_FAILED, ce.getMessage(), ce);
 		}
+		catch(DuplicateKeyException de) {
+			throw new ResponseStatusException(
+					HttpStatus.CONFLICT, "Employee is already clocked in for this shift", de);
+		}
 		catch(NonExistentEntityException neee) {
 			throw new ResponseStatusException(
 					HttpStatus.FAILED_DEPENDENCY, neee.getMessage(), neee);
@@ -168,6 +172,23 @@ public class AppController {
 		catch(NonExistentEntityException ndfe) {
 			throw new ResponseStatusException(
 					HttpStatus.NOT_FOUND, "Employee Does Not Exist (Referential Integrity Exception)", null);
+		}
+	}
+	
+	@GetMapping(path="/capstone/employee/all/{startDate}/{endDate}")
+	public List<Employee> getAllEmployeeShifts(@PathVariable("startDate") String startDate,
+												@PathVariable("endDate") String endDate) {
+
+		log.info("{} startDate: {} endDate: {}", startDate, endDate);
+
+		try {
+			LocalDate start = LocalDate.parse(startDate, DateTimeFormatter.BASIC_ISO_DATE);
+			LocalDate end = LocalDate.parse(endDate, DateTimeFormatter.BASIC_ISO_DATE);
+			return employeeService.findAllEmployeeShifts(start, end);
+		}
+		catch(DateTimeParseException dtpe) {
+			throw new ResponseStatusException(
+					HttpStatus.EXPECTATION_FAILED, "Date must be in yyyyMMdd format", null);
 		}
 	}
 	
