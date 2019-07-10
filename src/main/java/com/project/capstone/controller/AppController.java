@@ -3,7 +3,6 @@ package com.project.capstone.controller;
 import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -53,16 +52,10 @@ public class AppController {
 	}
 	
 	@PatchMapping(path="/capstone/employees/{id}/clockout")
-	public ClockState clockOutEmployee(
-			@PathVariable("id") String id, 
-				/*@RequestParam ("workingDate") String workingDate,*/
-					@RequestParam ("shiftId") int shiftId) {
+	public ClockState clockOutEmployee(@PathVariable("id") String id) {
 		try {
 			
-			/*LocalDateTime ldt= LocalDateTime.of(LocalDate.parse(workingDate, DateTimeFormatter.BASIC_ISO_DATE),
-													LocalTime.now());*/
-			//LocalDateTime ldt = LocalDateTime.now();
-			employeeService.endEmployeeShift(id,shiftId);
+			employeeService.endEmployeeShift(id);
 			return ClockState.CLOCK_OUT;
 		}
 		catch(DateTimeParseException dtpe) {
@@ -82,13 +75,8 @@ public class AppController {
 	@PostMapping(path="/capstone/employees/{id}/clockin")
 	public ClockState clockInEmployee(
 			@PathVariable("id") String id, 
-				/*@RequestParam ("workingDate") String workingDate,*/
-					@RequestParam ("shiftId") int shiftId) {
-		
+				@RequestParam ("shiftId") int shiftId) {
 		try {
-			/*LocalDateTime ldt= LocalDateTime.of(LocalDate.parse(workingDate, DateTimeFormatter.BASIC_ISO_DATE),
-													LocalTime.now());*/
-			
 			LocalDateTime ldt = LocalDateTime.now();
 			employeeService.beginEmployeeShift(id,shiftId,ldt);
 			return ClockState.CLOCK_IN;

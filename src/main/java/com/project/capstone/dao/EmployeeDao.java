@@ -3,6 +3,7 @@ package com.project.capstone.dao;
 import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -46,9 +48,9 @@ public class EmployeeDao extends AbstractDao {
 	private static final String GET_ALL_EMP_SHIFTS_FOR_GIVEN_DATES_SQL = 
 			"select s.*,e.first_name,e.last_name,e.email from emp_shift s inner join emp e on s.emp_id = e.emp_id where s.working_date between to_date(?,'YYYY-MM-DD') and to_date(?,'YYYY-MM-DD')";
 
-	private static final String GET_LASTEST_CLOCK_IN_FOR_EMP_AND_GIVEN_SHIFT = 
-			"select shift_id, working_date from emp_shift where emp_id = ? and " + 
-			"shift_id = ? and working_date = (select max(working_date) from emp_shift) and clock_out_time is null";
+	private static final String GET_LASTEST_CLOCK_IN_FOR_EMP = 
+			"with v as(select shift_id, working_date from emp_shift where emp_id = ? and working_date = (select max(working_date) from emp_shift) and clock_out_time is null) " +
+			"select v.* from v where shift_id = (select max(v.shift_id) from v)";
 	@Autowired
 	@Qualifier("oracleDataSource")
     private DataSource oracleDataSource;
@@ -71,38 +73,26 @@ public class EmployeeDao extends AbstractDao {
     }
     
     @Transactional(transactionManager="oracleTransactionManager")
-    public int updateEmployeeShift(String id, int shiftId, LocalDateTime workingDateTime) {
-    	if(StringUtils.isNotBlank(id) &&
-    			Objects.nonNull(workingDateTime) &&
-    				shiftService.findShifts().stream().anyMatch(s->s.getShiftId()==shiftId)) {
-    		final LocalDate ld = workingDateTime.toLocalDate();
-    		Optional<Employee> optEmployee = findEmployeeShifts(id,ld);
+    public int updateEmployeeShift(String id) {
+    	if(StringUtils.isNotBlank(id)) {
+    		Optional<Employee> optEmployee = findEmployee(id);
     		if(optEmployee.isPresent()) {
-    			LocalDate workingDate = workingDateTime.toLocalDate();
-    			String clockOutTime = DateTimeUtils.getLocalTime(workingDateTime.toLocalTime());
-    			Optional<Shift> optShift = optEmployee.get().getShifts(workingDate).stream().filter(s->s.getShiftId()==shiftId).findFirst();
-    			if(optShift.isPresent()) {
-    				if(optShift.get().getShiftEndTime()==null) {
-    					return this.jdbcTemplate
-    							.update(CLOCK_OUT_DML, 
-    										new Object[] {clockOutTime, id, shiftId, DateTimeUtils.convertLocalDateToDate(workingDate)});
-    				}
-    				else {
-    					log.error("{} already clocked out", id);
-    					throw new ClockOutException(MessageFormat.format("{0} already clocked out", id));
-    				}
+    			Optional<Pair<LocalDate,Integer>> optWorkingShift = this.getLatestEmployeeShift(id);	
+    			if(optWorkingShift.isPresent()) {
+    				Pair<LocalDate,Integer> pair = optWorkingShift.get();
+    				String clockOutTime = DateTimeUtils.getLocalTime(LocalTime.now());
+    				return this.jdbcTemplate
+							.update(CLOCK_OUT_DML, 
+										new Object[] {clockOutTime, id, pair.getRight(), DateTimeUtils.convertLocalDateToDate(pair.getLeft())});
     			}
     			else {
-    				log.error("Not the right shift");
-    				throw new ClockOutException("Not the right shift");
+					log.error("{} either did not clock in yet or has already clocked out", id);
+					throw new ClockOutException(MessageFormat.format("{0} either did not clock in yet or has already clocked out", id));
     			}
     		}
-    		else {
-    			log.error("{} not clocked in", id);
-    			throw new ClockOutException(MessageFormat.format("{0} not clocked in", id));
-    		}
+    		throw new NonExistentEntityException(MessageFormat.format("Employee with EMP_ID {0} not found", id));
     	}
-    	throw new ClockOutException("Employee id, working date and shift required");
+    	throw new ClockOutException("Employee id required");
 	}
     @Transactional(transactionManager="oracleTransactionManager")
     public int insertEmployeeShift(String id,int shiftId,LocalDateTime workingDateTime) {
@@ -289,20 +279,25 @@ public class EmployeeDao extends AbstractDao {
     	);
     }
     @Transactional(transactionManager="oracleTransactionManager", readOnly=true)
-    public Optional<LocalDate> getLatestEmployeeShift(String empId, int shiftId) {
+    public Optional<Pair<LocalDate,Integer>> getLatestEmployeeShift(String empId) {
     	return 
 			this.jdbcTemplate
-				.query(GET_LASTEST_CLOCK_IN_FOR_EMP_AND_GIVEN_SHIFT, 
-						new Object[] {empId,shiftId},
+				.query(GET_LASTEST_CLOCK_IN_FOR_EMP, 
+						new Object[] {empId},
 			    			(rs)->
 			    			{
-			    				Optional<LocalDate> optDateShift = Optional.<LocalDate>empty(); 
+			    				Optional<Pair<LocalDate,Integer>> optDateShift = Optional.<Pair<LocalDate,Integer>>empty(); 
 			    				if(rs.next()) {
-			    					optDateShift = Optional.<LocalDate>of(DateTimeUtils.convertDateToLocalDate(rs.getDate("working_date")));
+			    					optDateShift = 
+			    						Optional.<Pair<LocalDate,Integer>>of( 
+			    							Pair.of(
+			    								DateTimeUtils.convertDateToLocalDate(rs.getDate("working_date")),
+			    									rs.getInt("shift_id")
+			    							)
+			    						);
 			    				}
 			    				return optDateShift;
 			    			}
-		
 			);
     }
 }

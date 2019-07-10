@@ -9,6 +9,13 @@ import org.apache.commons.lang3.StringUtils;
 
 public final class DateTimeUtils {
 	private DateTimeUtils() {}
+	public static boolean isInBetween(LocalTime start, LocalTime end, LocalTime time) {
+		  if (start.isAfter(end)) {
+		    return !time.isBefore(start) || !time.isAfter(end);
+		  } else {
+		    return !time.isBefore(start) && !time.isAfter(end);
+		  }
+		}
 	public static LocalTime getLocalTime(String s) {
 		if(StringUtils.isNotBlank(s) && 
 				Constants.HHmm_REGEX.matcher(s).matches()) {
