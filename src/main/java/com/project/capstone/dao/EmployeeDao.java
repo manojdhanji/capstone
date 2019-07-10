@@ -45,7 +45,10 @@ public class EmployeeDao extends AbstractDao {
 	
 	private static final String GET_ALL_EMP_SHIFTS_FOR_GIVEN_DATES_SQL = 
 			"select s.*,e.first_name,e.last_name,e.email from emp_shift s inner join emp e on s.emp_id = e.emp_id where s.working_date between to_date(?,'YYYY-MM-DD') and to_date(?,'YYYY-MM-DD')";
-	
+
+	private static final String GET_LASTEST_CLOCK_IN_FOR_EMP_AND_GIVEN_SHIFT = 
+			"select shift_id, working_date from emp_shift where emp_id = ? and " + 
+			"shift_id = ? and working_date = (select max(working_date) from emp_shift) and clock_out_time is null";
 	@Autowired
 	@Qualifier("oracleDataSource")
     private DataSource oracleDataSource;
@@ -284,7 +287,22 @@ public class EmployeeDao extends AbstractDao {
 	    					return employeeList;
 	    				}
     	);
-    	
-    	
+    }
+    @Transactional(transactionManager="oracleTransactionManager", readOnly=true)
+    public Optional<LocalDate> getLatestEmployeeShift(String empId, int shiftId) {
+    	return 
+			this.jdbcTemplate
+				.query(GET_LASTEST_CLOCK_IN_FOR_EMP_AND_GIVEN_SHIFT, 
+						new Object[] {empId,shiftId},
+			    			(rs)->
+			    			{
+			    				Optional<LocalDate> optDateShift = Optional.<LocalDate>empty(); 
+			    				if(rs.next()) {
+			    					optDateShift = Optional.<LocalDate>of(DateTimeUtils.convertDateToLocalDate(rs.getDate("working_date")));
+			    				}
+			    				return optDateShift;
+			    			}
+		
+			);
     }
 }
