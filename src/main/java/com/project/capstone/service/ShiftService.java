@@ -30,6 +30,5 @@ public class ShiftService {
 				           .filter(s->DateTimeUtils.isInBetween(s.getShiftStartTime(), s.getShiftEndTime(), lt))
 				           .findFirst()
 				           .orElseThrow(()->new RuntimeException("Could not find shift"));
-				           
 	}
 }

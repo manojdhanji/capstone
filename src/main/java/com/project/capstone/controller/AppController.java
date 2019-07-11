@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.capstone.exception.AddEmployeeException;
 import com.project.capstone.exception.ClockInException;
@@ -50,6 +51,16 @@ public class AppController {
 	public List<Shift> getShifts(){
 		return shiftService.findShifts();
 	}
+	@GetMapping(path="/capstone/shifts/closest")
+	public int findClosestShift(){
+		try {
+		 return shiftService.findClosestShift().getShiftId();
+		}
+		catch(Exception e) {
+			return -1;
+		}
+	}
+	
 	
 	@PatchMapping(path="/capstone/employees/{id}/clockout")
 	public ClockState clockOutEmployee(@PathVariable("id") String id) {
@@ -198,5 +209,22 @@ public class AppController {
 	@GetMapping(path="/capstone/employees")
 	public List<Employee> getEmployees(){
 		return employeeService.getEmployees();
+	}
+	
+	@GetMapping(path = "/add")
+	public ModelAndView add() {
+	ModelAndView mav = new ModelAndView("add");
+	   return mav;
+	}
+	@GetMapping(path = "/clockin")
+	public ModelAndView clockin() {
+	ModelAndView mav = new ModelAndView("clockin");
+	   return mav;
+	}
+
+	@GetMapping(path = "/clockout")
+	public ModelAndView clockout() {
+	ModelAndView mav = new ModelAndView("clockout");
+	   return mav;
 	}
 }

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+	<body>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+		<h2>Employee Clock In</h2>
+		<form action="/capstone/employees/" method="patch" id="my_form">
+		Emp id:<br>
+		  <input type="text" name="emp_id" id="emp_id" value=""><br>
+		  <input type="submit" value="ClockOut" id="post_btn">
+		</form> 
+		<script>
+		$("#my_form")
+			.submit(function(event){
+				event.preventDefault(); //prevent default action 
+				var post_url = $(this).attr("action"); //get form action url
+				var request_method = $(this).attr("method"); //get form GET/POST method
+				//var form_data = $(this).serialize(); //Encode form elements for submission
+				var id=$("#emp_id").val();
+				post_url=post_url+id+"/clockout"
+				$.ajax(
+					{
+						url : post_url,
+						type: request_method,
+					}
+				)
+				.done(function(response){ //
+							alert(response);
+						}
+				);
+			}
+		);
+		</script>
+	</body>
+</html>

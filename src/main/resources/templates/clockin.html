@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<body>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+		<h2>Employee Clock In</h2>
+
+		<form action="/capstone/employees/" method="post" id="my_form">
+		Emp id:<br>
+		  <input type="text" name="emp_id" id="emp_id" value=""><br>
+		  Shift id:<br>
+		  <input type="text" name="shift_id" id="shift_id" value="">
+		  <br>
+		  <input type="submit" value="ClockIn" id="post_btn">
+		</form> 
+		<script>
+		$('document')
+			.ready(function () {
+					$.ajax(
+						{
+							url : "/capstone/shifts/closest",
+							type: "get",
+						}
+					)
+					.done(function(response)
+						{ 
+					 		$('#shift_id').val(response)
+						}
+					);
+			}
+		);
+		$("#my_form")
+			.submit(function(event){
+				event.preventDefault(); //prevent default action 
+				var post_url = $(this).attr("action"); //get form action url
+				var request_method = $(this).attr("method"); //get form GET/POST method
+				var id=$("#emp_id").val();
+				var shiftId=$("#shift_id").val();
+				post_url=post_url+id+"/clockin"
+				$.ajax(
+					{
+						url : post_url,
+						type: request_method,
+						data : {shiftId:shiftId}
+					}
+				)
+				.done(function(response){ //
+							alert(response);
+						}
+				);
+			}
+		);
+		</script>
+	</body>
+</html>
