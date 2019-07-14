@@ -39,7 +39,7 @@ public class EmployeeDao extends AbstractDao {
 	private static final String GET_EMP_SHIFTS_FOR_GIVEN_DATES_SQL = 
 			"select e.*, s.shift_id, s.clock_in_time, s.clock_out_time, s.working_date from emp e " +
 			 	"left outer join emp_shift s on e.emp_id = s.emp_id where e.emp_id = ? and s.working_date between to_date(?,'YYYY-MM-DD') and to_date(?,'YYYY-MM-DD')";
-	private static final String GET_EMP_SQL = "select e.* from EMP e where e.emp_id = ?";
+	private static final String GET_EMP_BY_EMP_ID_SQL = "select e.* from EMP e where e.emp_id = ?";
 	private static final String CLOCK_IN_DML = "insert into emp_shift (emp_id, shift_id, clock_in_time, working_date) values (?,?,?,?)";
 	
 	private static final String INSERT_EMP_DML = "insert into emp (emp_id, first_name, last_name, email) values (?,?,?,?)";
@@ -51,6 +51,9 @@ public class EmployeeDao extends AbstractDao {
 	private static final String GET_LASTEST_CLOCK_IN_FOR_EMP = 
 			"with v as(select shift_id, working_date from emp_shift where emp_id = ? and working_date = (select max(working_date) from emp_shift) and clock_out_time is null) " +
 			"select v.* from v where shift_id = (select max(v.shift_id) from v)";
+	
+	private static final String GET_EMP_SQL = 
+			"select * from EMP order by emp_id";
 	@Autowired
 	@Qualifier("oracleDataSource")
     private DataSource oracleDataSource;
@@ -118,7 +121,7 @@ public class EmployeeDao extends AbstractDao {
 	    				Optional.<Employee>of(
 							jdbcTemplate
 							.queryForObject(
-								GET_EMP_SQL, 
+								GET_EMP_BY_EMP_ID_SQL, 
 								new Object[] {id}, 
 									(rs, rowNum) ->
 										{
@@ -221,7 +224,7 @@ public class EmployeeDao extends AbstractDao {
     public List<Employee> findEmployees() {
 			return 
 				jdbcTemplate
-				.query("select * from EMP order by emp_id", 
+				.query(GET_EMP_SQL, 
 						(rs, rowNum) ->
 							{
 								Employee e  = new Employee();

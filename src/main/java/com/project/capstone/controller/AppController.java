@@ -1,6 +1,5 @@
 package com.project.capstone.controller;
 
-import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -61,17 +60,15 @@ public class AppController {
 		}
 	}
 	
-	
 	@PatchMapping(path="/capstone/employees/{id}/clockout")
 	public ClockState clockOutEmployee(@PathVariable("id") String id) {
 		try {
-			
-			employeeService.endEmployeeShift(id);
-			return ClockState.CLOCK_OUT;
-		}
-		catch(DateTimeParseException dtpe) {
-			throw new ResponseStatusException(
-					HttpStatus.EXPECTATION_FAILED, "Date must be in yyyyMMdd format", null);
+			if(Constants.EMP_ID_PATTERN_MATCH.test(id)) {
+				employeeService.endEmployeeShift(id);
+				return ClockState.CLOCK_OUT;
+			}
+			else
+				throw new IllegalArgumentException("Employee Id format required: EMP-XXXX");
 		}
 		catch(ClockOutException ce) {
 			throw new ResponseStatusException(
@@ -81,6 +78,10 @@ public class AppController {
 			throw new ResponseStatusException(
 					HttpStatus.FAILED_DEPENDENCY, ne.getMessage(), ne);
 		}
+		catch(IllegalArgumentException ie) {
+			throw new ResponseStatusException(
+					HttpStatus.FAILED_DEPENDENCY, ie.getMessage(), ie);
+		}
 	}
 	
 	@PostMapping(path="/capstone/employees/{id}/clockin")
@@ -88,25 +89,29 @@ public class AppController {
 			@PathVariable("id") String id, 
 				@RequestParam ("shiftId") int shiftId) {
 		try {
+			if(!Constants.EMP_ID_PATTERN_MATCH.test(id)) 
+				throw new IllegalArgumentException("Employee Id format required: EMP-XXXX");
+			if(shiftService.findShifts().stream().noneMatch(s->s.getShiftId()==shiftId))
+				throw new IllegalArgumentException("Invalid shift Id");
 			LocalDateTime ldt = LocalDateTime.now();
 			employeeService.beginEmployeeShift(id,shiftId,ldt);
 			return ClockState.CLOCK_IN;
 		}
-		catch(DateTimeParseException dtpe) {
-			throw new ResponseStatusException(
-					HttpStatus.EXPECTATION_FAILED, "Date must be in yyyyMMdd format", null);			
-		}
 		catch(ClockInException ce) {
 			throw new ResponseStatusException(
-					HttpStatus.PRECONDITION_FAILED, ce.getMessage(), ce);
+				HttpStatus.PRECONDITION_FAILED, ce.getMessage(), ce);
 		}
 		catch(DuplicateKeyException de) {
 			throw new ResponseStatusException(
-					HttpStatus.CONFLICT, "Employee is already clocked in for this shift", de);
+				HttpStatus.CONFLICT, "Employee is already clocked in for this shift", de);
 		}
 		catch(NonExistentEntityException neee) {
 			throw new ResponseStatusException(
-					HttpStatus.FAILED_DEPENDENCY, neee.getMessage(), neee);
+				HttpStatus.FAILED_DEPENDENCY, neee.getMessage(), neee);
+		}
+		catch(IllegalArgumentException ie) {
+			throw new ResponseStatusException(
+					HttpStatus.FAILED_DEPENDENCY, ie.getMessage(), ie);
 		}
 	}
 	
@@ -116,8 +121,10 @@ public class AppController {
 				@RequestParam("firstName") String firstName,
 					@RequestParam("lastName") String lastName,
 						@RequestParam("email") String email) {
-		if(StringUtils.isNotBlank(id) && 
-				Constants.EMP_ID_REGEX.matcher(id).matches()) {
+		if(Constants.EMP_ID_PATTERN_MATCH.test(id) && 
+			Constants.EMAIL_PATTERN_MATCH.test(email) &&
+				StringUtils.isNotBlank(firstName) &&
+					StringUtils.isNotBlank(firstName)) {
 			Employee e = new Employee();
 			e.setEmpId(id);
 			e.setFirstName(firstName);
@@ -139,18 +146,20 @@ public class AppController {
 		}
 		throw new ResponseStatusException(
 				HttpStatus.EXPECTATION_FAILED,
-					MessageFormat.format("Employee ID does not match {0}",Constants.EMP_ID_REGEX), null);
+					"Input data must be valid", null);
 	}
 	@GetMapping(path="/capstone/employees/{id}")
 	public Employee getEmployee(@PathVariable("id") String id) {
-		log.info("id: {}",id);
 		Optional<Employee> optEmployee = Optional.<Employee>empty();
+		if(!Constants.EMP_ID_PATTERN_MATCH.test(id)) 
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND, "Employee Id format required: EMP-XXXX", null); 
 		optEmployee = employeeService.findEmployee(id);
 		if(optEmployee.isPresent()) {
 			return optEmployee.get();
 		}
 		throw new ResponseStatusException(
-				HttpStatus.NOT_FOUND, "Employee Does Not Exist", null);
+			HttpStatus.NOT_FOUND, "Employee Does Not Exist", null);
 	}
 	
 	@GetMapping(path="/capstone/employees/{id}/shifts")
@@ -159,10 +168,14 @@ public class AppController {
 				@RequestParam("startDate") String startDate,
 					@RequestParam("endDate") Optional<String> optEndDate) {
 		
-		log.info("id: {} startDate: {} endDate: {}",id, startDate, optEndDate);
+		
 		
 		try {
 			Optional<Employee> optEmployee = Optional.<Employee>empty();
+			if(!Constants.EMP_ID_PATTERN_MATCH.test(id)) 
+				throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND, "Employee Id format required: EMP-XXXX", null); 
+			log.info("id: {} startDate: {} endDate: {}",id, startDate, optEndDate);
 			LocalDate start = LocalDate.parse(startDate, DateTimeFormatter.BASIC_ISO_DATE);
 			if(optEndDate.isPresent()) {
 				LocalDate end = LocalDate.parse(optEndDate.get(), DateTimeFormatter.BASIC_ISO_DATE);
@@ -193,11 +206,10 @@ public class AppController {
 			@RequestParam("startDate") String startDate,
 				@RequestParam("endDate") String endDate) {
 
-		log.info("{} startDate: {} endDate: {}", startDate, endDate);
-
 		try {
 			LocalDate start = LocalDate.parse(startDate, DateTimeFormatter.BASIC_ISO_DATE);
 			LocalDate end = LocalDate.parse(endDate, DateTimeFormatter.BASIC_ISO_DATE);
+			log.info("{} startDate: {} endDate: {}", startDate, endDate);
 			return employeeService.findAllEmployeesShifts(start, end);
 		}
 		catch(DateTimeParseException dtpe) {
@@ -208,7 +220,13 @@ public class AppController {
 
 	@GetMapping(path="/capstone/employees")
 	public List<Employee> getEmployees(){
-		return employeeService.getEmployees();
+		
+		List<Employee> employees =  employeeService.getEmployees();
+		if(employees.isEmpty()) {
+			throw new ResponseStatusException(
+			          HttpStatus.NOT_FOUND, "No Employees Found", null);
+		}
+		return employees;
 	}
 	
 	@GetMapping(path = "/add")
@@ -216,6 +234,7 @@ public class AppController {
 	ModelAndView mav = new ModelAndView("add");
 	   return mav;
 	}
+	
 	@GetMapping(path = "/clockin")
 	public ModelAndView clockin() {
 	ModelAndView mav = new ModelAndView("clockin");
@@ -225,6 +244,30 @@ public class AppController {
 	@GetMapping(path = "/clockout")
 	public ModelAndView clockout() {
 	ModelAndView mav = new ModelAndView("clockout");
+	   return mav;
+	}
+	
+	@GetMapping(path = "/reports")
+	public ModelAndView reports() {
+	ModelAndView mav = new ModelAndView("reports");
+	   return mav;
+	}
+	
+	@GetMapping(path = "/shifts")
+	public ModelAndView shifts() {
+	ModelAndView mav = new ModelAndView("shifts");
+	   return mav;
+	}
+	
+	@GetMapping(path = "/employees")
+	public ModelAndView employees() {
+	ModelAndView mav = new ModelAndView("employees");
+	   return mav;
+	}
+	
+	@GetMapping(path = "/aboutus")
+	public ModelAndView aboutus() {
+	ModelAndView mav = new ModelAndView("aboutus");
 	   return mav;
 	}
 }

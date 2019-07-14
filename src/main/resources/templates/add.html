@@ -1,22 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>Add Employee</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Bootstrap -->
+		<link rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<!-- jQuery -->
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	</head>
 	<body>
 		<h2>Add Employee</h2>
-		<form action="/capstone/employees" method="post">
-		Emp id:<br>
-		  <input type="text" name="id" value="">
-		  <br>
-		  First name:<br>
-		  <input type="text" name="firstName" value="Mickey">
-		  <br>
-		  Last name:<br>
-		  <input type="text" name="lastName" value="Mouse">
-		  <br>
-		  Email:<br>
-		  <input type="text" name="email" value="Mouse">
-		  <br>
-		  <br>
-		  <input type="submit" value="Add Employee">
+		<form class="form-inline" action="/capstone/employees" method="post">
+			<div class='form-group' style='margin-top: 50px;'>
+				<label for="emp_id">Emp ID:</label> 
+					<input type="text" class="form-control" name="id" id="emp_id" value="" placeholder="EMP-XXXX" style='width: 100px;'>
+				<label for="first_name">First Name:</label> 
+					<input type="text" class="form-control" name="firstName" id="first_name" value="">
+				<label for="last_name">Last Name:</label> 
+					<input type="text" class="form-control" name="lastName" id="last_name" value="">
+				<label for="email">Email:</label> 
+					<input type="text" class="form-control" name="email" id="email" value="" placeholder="name@example.com">
+			  <input class="btn btn-primary"type="submit" value="Add Employee">
+			  <input type="reset" class="btn btn-secondary" value="Clear" />
+		  </div>
 		</form> 
+		<script>
+		
+		</script>
 	</body>
 </html>

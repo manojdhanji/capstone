@@ -7,9 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.project.capstone.dao.EmployeeDao;
 import com.project.capstone.model.Employee;
@@ -42,11 +40,6 @@ public class EmployeeService {
 		return employeeDao.findEmployee(id);
 	}
 	public List<Employee> getEmployees(){
-		List<Employee> employees = employeeDao.findEmployees();
-		if(employees.isEmpty()) {
-			throw new ResponseStatusException(
-			          HttpStatus.NOT_FOUND, "No Employees Found", null);
-		}
-		return employees;
+		return employeeDao.findEmployees();
 	}
 }

@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>Employee Clock Out</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Bootstrap -->
+		<link rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<!-- jQuery -->
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	</head>
 	<body>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-		<h2>Employee Clock In</h2>
-		<form action="/capstone/employees/" method="patch" id="my_form">
-		Emp id:<br>
-		  <input type="text" name="emp_id" id="emp_id" value=""><br>
-		  <input type="submit" value="ClockOut" id="post_btn">
+		<h2>Employee Clock Out</h2>
+		<form class="form-inline" action="/capstone/employees/" method="patch" id="my_form">
+			<div class='form-group' style='margin-top: 50px;'>
+				<label for="emp_id">Emp ID:</label> 
+				<input type="text" class="form-control" name="emp_id" id="emp_id" value="" placeholder="EMP-XXXX">
+			    <input type="submit" class="btn btn-primary" value="ClockOut" id="post_btn">
+			    <input type="reset" class="btn btn-secondary" id="reset_btn" value="Clear" />
+		  </div>
 		</form> 
 		<script>
 		$("#my_form")
@@ -16,17 +33,28 @@
 				var request_method = $(this).attr("method"); //get form GET/POST method
 				//var form_data = $(this).serialize(); //Encode form elements for submission
 				var id=$("#emp_id").val();
-				post_url=post_url+id+"/clockout"
-				$.ajax(
-					{
-						url : post_url,
-						type: request_method,
-					}
-				)
-				.done(function(response){ //
-							alert(response);
+				var empRegex = new RegExp(/^EMP-\d{4}$/);
+				if(id.match(empRegex)){
+					post_url=post_url+id+"/clockout"
+					$.ajax(
+						{
+							url : post_url,
+							type: request_method,
 						}
-				);
+					)
+					.done(function(response){ //
+								alert(response);
+							}
+					)
+					.fail (function(jqxhr, textStatus, errorThrown)  
+						{
+        					alert("Error: " + jqxhr.statusText + " : " + jqxhr.responseText) ;
+        					$("#reset_btn").click();
+    					}
+					);
+				}
+				else
+					alert("Employee Id format EMP-XXXX");
 			}
 		);
 		</script>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Shift Reports For Employees</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Bootstrap -->
+		<link rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<!-- jQuery -->
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+		<!-- Datepicker -->
+		<link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css' rel='stylesheet' type='text/css'>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js'></script>
+	</head>
+	<body>
+		<h3>Shift Reports For Employees</h3>
+		<form class="form-inline" action="/capstone/employees/" method="get" id="my_form">
+			<div class='form-group' style='margin-top: 50px;'>
+				<label for="emp_id">Emp ID:</label> 
+				<input type="text" class="form-control" id="emp_id" placeholder="EMP-XXXX" style='width: 100px;' >
+			 	<label for="s_datepicker">Start Date:</label><input type='text' class="form-control" id='s_datepicker' style='width: 100px;' > 
+			 	<label for="e_datepicker">End Date:</label><input type='text' class="form-control" id="e_datepicker" style='width: 100px;' >
+			 	<input type="submit" class="btn btn-primary" value="Get Report" id="post_btn">
+			 	<input type="reset" class="btn btn-secondary" value="Clear" />
+			</div>      
+		</form>
+	</body>
+	<script>
+	$(document).ready(function(){
+		 $('#s_datepicker').datepicker(); 
+		 $('#e_datepicker').datepicker(); 
+		});
+	</script>
+</html>
