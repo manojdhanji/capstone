@@ -25,17 +25,132 @@
 			<div class='form-group' style='margin-top: 50px;'>
 				<label for="emp_id">Emp ID:</label> 
 				<input type="text" class="form-control" id="emp_id" placeholder="EMP-XXXX" style='width: 100px;' >
-			 	<label for="s_datepicker">Start Date:</label><input type='text' class="form-control" id='s_datepicker' style='width: 100px;' > 
-			 	<label for="e_datepicker">End Date:</label><input type='text' class="form-control" id="e_datepicker" style='width: 100px;' >
+			 	<label for="s_datepicker">Start Date:</label><input data-date-format="yyyymmdd" type='text' class="form-control" id='s_datepicker' autocomplete="off" style='width: 100px;' > 
+			 	<label for="e_datepicker">End Date:</label><input data-date-format="yyyymmdd" type='text' class="form-control" id="e_datepicker" autocomplete="off" style='width: 100px;' >
 			 	<input type="submit" class="btn btn-primary" value="Get Report" id="post_btn">
-			 	<input type="reset" class="btn btn-secondary" value="Clear" />
+			 	<input type="reset" class="btn btn-secondary" value="Clear" id="reset_btn"/>
 			</div>      
 		</form>
+		<div>
+			<br/>
+			<table class="table table-striped table-dark" id="table_id" ></table>
+		</div>
 	</body>
 	<script>
+	var dateRegex = new RegExp(/\d{8}$/);
+	var empRegex = new RegExp(/^EMP-\d{4}$/);
+	function createDate(strDate){
+		if(isDateFormatValid(strDate)){
+			var year = parseInt(strDate.substring(0,4));
+			var month = parseInt(strDate.substring(4,6));
+			var date = parseInt(strDate.substring(6));
+			return new Date(year,month,date,0,0,0);
+		}
+		throw "Cannot create date!";
+	}
+	function isDateFormatValid(strDate){
+		return strDate!="" && strDate.match(dateRegex);
+	} 
 	$(document).ready(function(){
 		 $('#s_datepicker').datepicker(); 
 		 $('#e_datepicker').datepicker(); 
 		});
+	
+	$("#my_form")
+	.submit(function(event){
+		event.preventDefault(); //prevent default action 
+		var get_url = $(this).attr("action"); //get form action url
+		var request_method = $(this).attr("method"); //get form GET/POST method
+		var id=$("#emp_id").val();
+		var startDate = $('#s_datepicker').val();
+		var endDate = $('#e_datepicker').val();
+		
+		if(isDateFormatValid(startDate) && 
+				isDateFormatValid(endDate)){
+			try{
+				var sDate = createDate(startDate);
+				var eDate = createDate(endDate);
+				if(sDate<=eDate){
+					var id=$("#emp_id").val();
+					console.log("Id: "+id);
+					console.log(startDate + " " + endDate);
+					var queryString = "?startDate="+startDate+"&endDate="+endDate;
+					if(id!=""){
+						if(id.match(empRegex)){
+							get_url = get_url + "/"+ id + "/shifts/"+queryString;
+						}
+						else{
+							alert("Employee Id format EMP-XXXX");
+							$("#reset_btn").click();
+							return;
+						}
+					}
+					else{
+						get_url =get_url + "/shifts"+queryString;
+					}
+					$.ajax(
+						{
+							url : get_url,
+							type: "get",
+						}
+					)
+					.done(function(response)
+						{ 
+							var jsonObject = response;
+							if(!$.isEmptyObject(jsonObject)){
+								var strHtml = "<thead><tr><th scope='col'>EMP Id</th><th scope='col'>Working Date</th><th scope='col'>Shift Id</th><th scope='col'>Start Time</th><th scope='col'>End Time</th></tr><thead>";
+								strHtml += "<tbody>"
+								$(jsonObject).each(function()
+									{
+										var row = $(this)[0];
+										var empId = row["empId"];
+										var shifts = row["shifts"];
+										
+										$.each(shifts, function(k,v) {
+										    $.each(v, function(item) {
+										      	var shift = v[item];
+										      	console.log(k +"-"+shift);
+										      	shiftEndTime = shift["shiftEndTime"];
+										      	if(shiftEndTime===null)
+										      		shiftEndTime = ""
+										    	strHtml += '<tr><td>'+empId+'</td><td>'+k+'</td><td>'+shift["shiftId"]+'</td><td>'+shift["shiftStartTime"]+'</td><td>'+shiftEndTime+'</td></tr>';
+										    });
+										}); 
+									}
+								);
+								strHtml += "</tbody>"
+						 		$('#table_id').html(strHtml);
+							}
+							else{
+								alert("No records for the date range!");
+								$("#reset_btn").click();
+								$('#table_id').html("");
+							}
+						}
+					)
+					.fail (function(jqxhr, textStatus, errorThrown)  
+						{
+							alert("Error: " + jqxhr.statusText + " : " + jqxhr.responseText) ;
+						}
+					);					
+				}
+				else{
+					alert("Start date must be before than end date!");
+					$("#reset_btn").click();
+				}
+			} 
+			catch(err){
+				alert(err);
+				$("#reset_btn").click();
+			}
+		}
+		else{
+			alert("start-date and end-date cannot be empty!")
+			$("#reset_btn").click();
+			$('#table_id').html("");
+		}
+	}
+);
+
 	</script>
 </html>
