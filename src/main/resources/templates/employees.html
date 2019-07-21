@@ -31,7 +31,31 @@
 		</div>
 	</body>
 	<script>
-	
+	function removeEmployee(id){
+		var r = confirm("Remove employee "+ id);
+		if(r){
+			$.ajax(
+					{
+						url : "/capstone/employees/"+id,
+						type: "delete",
+						data : {id:id}
+					}
+				)
+				.done(function(response){ //
+						alert(response);
+						$('#table_id').html("");
+						}
+				)
+				.fail (function(jqxhr, textStatus, errorThrown) {
+						alert("Error: " + jqxhr.statusText + " : " + jqxhr.responseText) ;
+						$("#reset_btn").click();
+					}
+				);
+		}
+		else{
+			alert("Cancelled removing employee")
+		}
+	}
 	$("#my_form")
 		.submit(function(event){
 			event.preventDefault(); //prevent default action 
@@ -51,18 +75,20 @@
 			$.ajax(
 				{
 					url : get_url,
-					type: "get",
+					type: "get"
 				}
 			)
 			.done(function(response)
 				{ 
 					var jsonObject = response;
-					var strHtml = "<thead><tr><th scope='col'>EMP Id</th><th scope='col'>First Name</th><th scope='col'>Last Name</th><th scope='col'>Email</th></tr></thead>";
+					var strHtml = "<thead><tr><th scope='col'>Emp Id</th><th scope='col'>First Name</th><th scope='col'>Last Name</th><th scope='col'>Email</th><th scope='col'>Action</th></tr></thead>";
 					strHtml += "<tbody>"
 					$(jsonObject).each(function()
 						{
 							var row = $(this)[0];
-							strHtml += '<tr><td>'+row["empId"]+'</td><td>'+row["firstName"]+'</td><td>'+row["lastName"]+'</td><td>'+row["email"]+'</td></tr>';
+							var empId = row["empId"];
+							strHtml += '<tr><td>'+empId+'</td><td>'+row["firstName"]+'</td><td>'+row["lastName"]+
+							'</td><td>'+row["email"]+'</td><td><button class=\'btn btn-warning\' onclick="removeEmployee(\''+empId+'\')">Remove</button></td></tr>';
 						}
 					);
 					strHtml += "</tbody>"

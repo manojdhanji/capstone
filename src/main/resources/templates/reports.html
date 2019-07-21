@@ -51,6 +51,37 @@
 	function isDateFormatValid(strDate){
 		return strDate!="" && strDate.match(dateRegex);
 	} 
+	function removeShift(id){
+		var array = id.split(":");
+		var empId = array[0];
+		var shiftId = array[1];
+		var workingDate = array[2];
+		workingDate = workingDate.replace("-","").replace("-","");
+		var r = confirm("Do you wish to remove this shift?");
+		if(r==true){
+			$.ajax(
+				{
+					url : "/capstone/employees/"+empId+"/shifts/"+shiftId,
+					type: "delete",
+					data: {workingDate:workingDate}
+				}
+			)
+			.done(function(response)
+				{ 
+					alert(response + "has been deleted");
+					$('#table_id').html("");
+					
+				}
+			)
+			.fail (function(jqxhr, textStatus, errorThrown)  
+				{
+					alert("Error: " + jqxhr.statusText + " : " + jqxhr.responseText) ;
+				}
+			);
+		}
+		else
+			alert("Cancelled removing the shift");
+	}
 	$(document).ready(function(){
 		 $('#s_datepicker').datepicker(); 
 		 $('#e_datepicker').datepicker(); 
@@ -91,14 +122,14 @@
 					$.ajax(
 						{
 							url : get_url,
-							type: "get",
+							type: "get"
 						}
 					)
 					.done(function(response)
 						{ 
 							var jsonObject = response;
 							if(!$.isEmptyObject(jsonObject)){
-								var strHtml = "<thead><tr><th scope='col'>EMP Id</th><th scope='col'>Working Date</th><th scope='col'>Shift Id</th><th scope='col'>Start Time</th><th scope='col'>End Time</th></tr><thead>";
+								var strHtml = "<thead><tr><th scope='col'>Emp Id</th><th scope='col'>Working Date</th><th scope='col'>Shift Id</th><th scope='col'>Start Time</th><th scope='col'>End Time</th><th scope='col'>Action</th></tr><thead>";
 								strHtml += "<tbody>"
 								$(jsonObject).each(function()
 									{
@@ -113,7 +144,9 @@
 										      	shiftEndTime = shift["shiftEndTime"];
 										      	if(shiftEndTime===null)
 										      		shiftEndTime = ""
-										    	strHtml += '<tr><td>'+empId+'</td><td>'+k+'</td><td>'+shift["shiftId"]+'</td><td>'+shift["shiftStartTime"]+'</td><td>'+shiftEndTime+'</td></tr>';
+										      	var id = empId + ":"+shift["shiftId"]+":"+k;
+										    	strHtml += '<tr><td>'+empId+'</td><td>'+k+'</td><td>'+shift["shiftId"]+'</td><td>'+shift["shiftStartTime"]+'</td><td>'+shiftEndTime+
+										    				'</td><td><button class=\'btn btn-warning\' onclick="removeShift(\''+id+'\')"">Remove</button></td</tr>';
 										    });
 										}); 
 									}

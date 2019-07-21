@@ -32,7 +32,9 @@ public class EmployeeService {
 	public Optional<Employee> findEmployeeShifts(String id, LocalDate startDate, LocalDate endDate) {
 		return employeeDao.findEmployeeShifts(id,startDate, endDate);
 	}
-	
+	public int deleteEmployeeShift(String id, int shiftId, LocalDate workingDate) {
+		return employeeDao.deleteEmployeeShift(id, shiftId, workingDate);
+	}
 	public int insertEmployee(Employee e) {
 		return employeeDao.insertEmployee(e);
 	}
@@ -41,5 +43,8 @@ public class EmployeeService {
 	}
 	public List<Employee> getEmployees(){
 		return employeeDao.findEmployees();
+	}
+	public int deleteEmployeeShift(String id) {
+		return employeeDao.deleteEmployee(id);
 	}
 }

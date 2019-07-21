@@ -35,10 +35,10 @@ public class EmployeeDao extends AbstractDao {
 	
 	private static final String GET_EMP_SHIFTS_SQL = 
 			"select e.*, s.shift_id, s.clock_in_time, s.clock_out_time, s.working_date from emp e " +
-			 	"left outer join emp_shift s on e.emp_id = s.emp_id where e.emp_id = ? and to_char(s.working_date, 'YYYY-MM-DD') = ?";
+			 	"left outer join emp_shift s on e.emp_id = s.emp_id where e.emp_id = ? and to_char(s.working_date, 'YYYY-MM-DD') = ? order by s.emp_id, s.working_date, s.shift_id";
 	private static final String GET_EMP_SHIFTS_FOR_GIVEN_DATES_SQL = 
 			"select e.*, s.shift_id, s.clock_in_time, s.clock_out_time, s.working_date from emp e " +
-			 	"left outer join emp_shift s on e.emp_id = s.emp_id where e.emp_id = ? and s.working_date between to_date(?,'YYYY-MM-DD') and to_date(?,'YYYY-MM-DD')";
+			 	"left outer join emp_shift s on e.emp_id = s.emp_id where e.emp_id = ? and s.working_date between to_date(?,'YYYY-MM-DD') and to_date(?,'YYYY-MM-DD') order by s.emp_id, s.working_date, s.shift_id";
 	private static final String GET_EMP_BY_EMP_ID_SQL = "select e.* from EMP e where e.emp_id = ?";
 	private static final String CLOCK_IN_DML = "insert into emp_shift (emp_id, shift_id, clock_in_time, working_date) values (?,?,?,?)";
 	
@@ -46,7 +46,7 @@ public class EmployeeDao extends AbstractDao {
 	private static final String CLOCK_OUT_DML = "update emp_shift s set s.clock_out_time = ? where s.emp_id = ? and s.shift_id = ? and s.working_date = ?";
 	
 	private static final String GET_ALL_EMP_SHIFTS_FOR_GIVEN_DATES_SQL = 
-			"select s.*,e.first_name,e.last_name,e.email from emp_shift s inner join emp e on s.emp_id = e.emp_id where s.working_date between to_date(?,'YYYY-MM-DD') and to_date(?,'YYYY-MM-DD')";
+			"select s.*,e.first_name,e.last_name,e.email from emp_shift s inner join emp e on s.emp_id = e.emp_id where s.working_date between to_date(?,'YYYY-MM-DD') and to_date(?,'YYYY-MM-DD') order by s.emp_id, s.working_date, s.shift_id";
 
 	private static final String GET_LASTEST_CLOCK_IN_FOR_EMP = 
 			"with v as(select shift_id, working_date from emp_shift where emp_id = ? and working_date = (select max(working_date) from emp_shift) and clock_out_time is null) " +
@@ -54,6 +54,8 @@ public class EmployeeDao extends AbstractDao {
 	
 	private static final String GET_EMP_SQL = 
 			"select * from EMP order by emp_id";
+	private static final String DELETE_EMP_SHIFT = "delete from emp_shift where emp_id = ? and shift_id = ? and working_date = ?";
+	private static final String DELETE_EMP = "delete from emp where emp_id = ?";
 	@Autowired
 	@Qualifier("oracleDataSource")
     private DataSource oracleDataSource;
@@ -303,4 +305,14 @@ public class EmployeeDao extends AbstractDao {
 			    			}
 			);
     }
+    @Transactional(transactionManager="oracleTransactionManager")
+    public int deleteEmployeeShift(String empId, int shiftId, LocalDate workingDate) {
+    	return this.jdbcTemplate.update(DELETE_EMP_SHIFT,
+    			new Object[] {empId,shiftId,DateTimeUtils.convertLocalDateToDate(workingDate)});
+    }
+    @Transactional(transactionManager="oracleTransactionManager")
+	public int deleteEmployee(String id) {
+		return this.jdbcTemplate.update(DELETE_EMP,
+    			new Object[] {id});
+	}
 }
