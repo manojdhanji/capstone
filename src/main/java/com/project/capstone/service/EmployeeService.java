@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.capstone.dao.EmployeeDao;
 import com.project.capstone.model.Employee;
+import com.project.capstone.model.Shift;
 
 @Service
 public class EmployeeService {
@@ -44,7 +45,14 @@ public class EmployeeService {
 	public List<Employee> getEmployees(){
 		return employeeDao.findEmployees();
 	}
-	public int deleteEmployeeShift(String id) {
+	public int deleteEmployee(String id) {
 		return employeeDao.deleteEmployee(id);
+	}
+	public int updateEmployeeShift(String id, 
+									int shiftId, 
+										LocalDate workingDate, 
+											Shift newShift) {
+		return employeeDao.updateEmployeeShift(id,shiftId,workingDate,newShift);
+		
 	}
 }

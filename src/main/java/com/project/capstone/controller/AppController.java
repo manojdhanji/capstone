@@ -3,6 +3,7 @@ package com.project.capstone.controller;
 import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -35,6 +37,7 @@ import com.project.capstone.model.Shift;
 import com.project.capstone.service.EmployeeService;
 import com.project.capstone.service.ShiftService;
 import com.project.capstone.utils.Constants;
+import com.project.capstone.utils.ShiftUtils;
 
 @RestController
 public class AppController {
@@ -124,7 +127,7 @@ public class AppController {
 				HttpStatus.NOT_FOUND, "Employee Id format required: EMP-XXXX", null); 
 		}
 		int rowDeleted = 
-		employeeService.deleteEmployeeShift(id);
+		employeeService.deleteEmployee(id);
 		if(rowDeleted>0)
 			return id;
 		else
@@ -214,7 +217,48 @@ public class AppController {
 					HttpStatus.NOT_FOUND, "Employee Does Not Exist (Referential Integrity Exception)", null);
 		}
 	}
-	
+	@PutMapping( "/capstone/employees/{id}/shifts/{shiftId}")
+	public String updateEmployeeShift(
+			@PathVariable("id") String id,
+				@PathVariable("shiftId") int shiftId,
+					@RequestParam("newShiftId") int newShiftId,
+						@RequestParam ("newShiftStartTime") String newShiftStartTime,
+							@RequestParam("newShiftEndTime") String newShiftEndTime,
+								@RequestParam("workingDate") String workingDate) {
+		try {
+			if(!Constants.EMP_ID_PATTERN_MATCH.test(id)) 
+				throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND, "Employee Id format required: EMP-XXXX", null);
+			if(shiftService.findShifts().stream().noneMatch(s->s.getShiftId()==shiftId))
+				throw new IllegalArgumentException("Invalid shift Id");
+			if(shiftService.findShifts().stream().noneMatch(s->s.getShiftId()==newShiftId))
+				throw new IllegalArgumentException("Invalid new shift Id");
+			
+			LocalTime startTime = LocalTime.parse(newShiftStartTime, DateTimeFormatter.ofPattern("HHmm"));
+			LocalTime endTime = LocalTime.parse(newShiftEndTime, DateTimeFormatter.ofPattern("HHmm"));
+			LocalDate date = LocalDate.parse(workingDate, DateTimeFormatter.BASIC_ISO_DATE);
+			Shift newShift  = new Shift(newShiftId,startTime,endTime);
+			if(ShiftUtils.isValid(newShift, shiftService.findShifts()))
+			{
+				int rowUpdated = employeeService.updateEmployeeShift(id,shiftId,date,newShift);
+				if(rowUpdated>0) {
+					return MessageFormat.format("Shift {0} for date {1} for employee {2} has been updated", new Object[] {shiftId,date.format(DateTimeFormatter.ISO_LOCAL_DATE),id});
+				}
+				else
+					return MessageFormat.format("Could not find shift {0} for date {1} for employee {2}", new Object[] {shiftId,date.format(DateTimeFormatter.ISO_LOCAL_DATE),id});
+			}
+			else
+				throw new IllegalArgumentException("Invalid new shift - shift id and times do not agree");
+		}
+		catch(DateTimeParseException dtpe) {
+			throw new ResponseStatusException(
+					HttpStatus.EXPECTATION_FAILED, "Time must be in HHmm format", null);
+		}
+		catch(IllegalArgumentException ie) {
+			throw new ResponseStatusException(
+					HttpStatus.FAILED_DEPENDENCY, ie.getMessage(), ie);
+		}
+	}
 	@DeleteMapping( "/capstone/employees/{id}/shifts/{shiftId}")
 	public String deleteEmployeeShift(
 			@PathVariable("id") String id,

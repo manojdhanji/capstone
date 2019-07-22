@@ -9,6 +9,14 @@ public class Shift implements Serializable {
 	private int shiftId;
 	private LocalTime shiftStartTime;
 	private LocalTime shiftEndTime;
+	public Shift() {
+		
+	}
+	public Shift(int shiftId, LocalTime shiftStartTime, LocalTime shiftEndTime) {
+		this.setShiftId(shiftId);
+		this.setShiftStartTime(shiftStartTime);
+		this.setShiftEndTime(shiftEndTime);
+	}
 	/**
 	 * @return the shiftId
 	 */

@@ -21,7 +21,7 @@
 			<div class='form-group' style='margin-top: 50px;'>
 				<label for="emp_id">Emp Id:</label> 
 					<input type="text" class="form-control" name="id" id="emp_id" value="" placeholder="EMP-XXXX" style='width: 100px;'>
-				<input type="submit" class="btn btn-primary" value="Find" id="post_btn">
+				<input type="submit" class="btn btn-primary" value="Find" id="get_btn">
 			    <input type="reset" class="btn btn-secondary" id="reset_btn" value="Clear" />
 			</div>
 		</form>
@@ -41,10 +41,11 @@
 						data : {id:id}
 					}
 				)
-				.done(function(response){ //
+				.done(function(response)
+					{ //
 						alert(response);
-						$('#table_id').html("");
-						}
+						$("#get_btn").click();
+					}
 				)
 				.fail (function(jqxhr, textStatus, errorThrown) {
 						alert("Error: " + jqxhr.statusText + " : " + jqxhr.responseText) ;
@@ -87,8 +88,13 @@
 						{
 							var row = $(this)[0];
 							var empId = row["empId"];
-							strHtml += '<tr><td>'+empId+'</td><td>'+row["firstName"]+'</td><td>'+row["lastName"]+
-							'</td><td>'+row["email"]+'</td><td><button class=\'btn btn-warning\' onclick="removeEmployee(\''+empId+'\')">Remove</button></td></tr>';
+							strHtml += '<tr>'+
+										'<td>'+empId+'</td>'+
+										'<td>'+row["firstName"]+'</td>'+
+										'<td>'+row["lastName"]+'</td>'+
+										'<td>'+row["email"]+'</td>'+
+										'<td><button class=\'btn btn-warning\' onclick="removeEmployee(\''+empId+'\')">Remove</button></td>'+
+									   '</tr>';
 						}
 					);
 					strHtml += "</tbody>"

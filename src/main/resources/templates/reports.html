@@ -27,7 +27,7 @@
 				<input type="text" class="form-control" id="emp_id" placeholder="EMP-XXXX" style='width: 100px;' >
 			 	<label for="s_datepicker">Start Date:</label><input data-date-format="yyyymmdd" type='text' class="form-control" id='s_datepicker' autocomplete="off" style='width: 100px;' > 
 			 	<label for="e_datepicker">End Date:</label><input data-date-format="yyyymmdd" type='text' class="form-control" id="e_datepicker" autocomplete="off" style='width: 100px;' >
-			 	<input type="submit" class="btn btn-primary" value="Get Report" id="post_btn">
+			 	<input type="submit" class="btn btn-primary" value="Get Report" id="get_btn">
 			 	<input type="reset" class="btn btn-secondary" value="Clear" id="reset_btn"/>
 			</div>      
 		</form>
@@ -37,8 +37,11 @@
 		</div>
 	</body>
 	<script>
+	var shiftIds = [];
 	var dateRegex = new RegExp(/\d{8}$/);
+	var hhMMRegex = new RegExp(/\d{4}/)
 	var empRegex = new RegExp(/^EMP-\d{4}$/);
+	var hhMMssRegex = new RegExp(/^\d{2}:\d{2}:\d{2}$/);
 	function createDate(strDate){
 		if(isDateFormatValid(strDate)){
 			var year = parseInt(strDate.substring(0,4));
@@ -48,11 +51,81 @@
 		}
 		throw "Cannot create date!";
 	}
+	function convertToHHMM(hhMMss){
+		if(hhMMss===null)
+      		return "";
+		if(hhMMss.match(hhMMssRegex)){
+			return hhMMss.substring(0, hhMMss.lastIndexOf(":")).replace(":", "");
+		}
+		return "";
+	}
 	function isDateFormatValid(strDate){
 		return strDate!="" && strDate.match(dateRegex);
 	} 
+	function updateShift(id){
+		var array = id.split("_");
+		var empId = array[0];
+		var shiftId = array[1];
+		var workingDate = array[2];
+		var shiftStartTime = array[3];
+		var shiftEndTime = array[4];
+		workingDate = workingDate.replace("-","").replace("-","");
+		//alert(id);
+		var newShiftId = parseInt($("#si_"+id).val());
+		var newShiftStartTime = $("#st_"+id).val();
+		var newShiftEndTime = $("#et_"+id).val();
+		if(shiftIds.includes(newShiftId)!=true){
+			alert("Invalid shift id");
+			$("#si_"+id).val(shiftId);
+			return;
+		}
+		if(!ishhMMValid(newShiftStartTime)){
+			alert("Invalid start time. Please enter in military format [0-9]{4}");
+			$("#st_"+id).val(shiftStartTime);
+			return;
+		}
+		if(!ishhMMValid(newShiftEndTime)){
+			alert("Invalid end time. Please enter in military format [0-9]{4}");
+			$("#et_"+id).val(shiftEndTime);
+			return;
+		}
+		var r = confirm("Do you wish to update this shift?");
+		if(r){
+			$.ajax(
+					{
+						url : "/capstone/employees/"+empId+"/shifts/"+shiftId,
+						type: "put",
+						data : {newShiftId:newShiftId,newShiftStartTime:newShiftStartTime,newShiftEndTime:newShiftEndTime,workingDate:workingDate}
+					}
+				)
+				.done(function(response)
+					{ //
+						alert(response);
+						$("#get_btn").click();
+					}
+				)
+				.fail (function(jqxhr, textStatus, errorThrown) {
+						alert("Error: " + jqxhr.statusText + " : " + jqxhr.responseText) ;
+						$("#reset_btn").click();
+						$("#st_"+id).val(shiftStartTime);
+						$("#et_"+id).val(shiftEndTime);
+						$("#si_"+id).val(shiftId);
+					}
+				);
+		}		
+	}
+	function ishhMMValid(hhMM){
+		if(hhMM.match(hhMMRegex)){
+			var hh = hhMM.substring(0,2);
+			var mm = hhMM.substring(2);
+			if(hh>=0 && hh<=23 && mm>=0 && mm<=59){
+					return true;	
+			}
+		}
+		return false;
+	}
 	function removeShift(id){
-		var array = id.split(":");
+		var array = id.split("_");
 		var empId = array[0];
 		var shiftId = array[1];
 		var workingDate = array[2];
@@ -68,9 +141,8 @@
 			)
 			.done(function(response)
 				{ 
-					alert(response + "has been deleted");
-					$('#table_id').html("");
-					
+					alert("Selected shift for "+ response + " has been deleted");
+					$("#get_btn").click();
 				}
 			)
 			.fail (function(jqxhr, textStatus, errorThrown)  
@@ -88,102 +160,136 @@
 		});
 	
 	$("#my_form")
-	.submit(function(event){
-		event.preventDefault(); //prevent default action 
-		var get_url = $(this).attr("action"); //get form action url
-		var request_method = $(this).attr("method"); //get form GET/POST method
-		var id=$("#emp_id").val();
-		var startDate = $('#s_datepicker').val();
-		var endDate = $('#e_datepicker').val();
-		
-		if(isDateFormatValid(startDate) && 
-				isDateFormatValid(endDate)){
-			try{
-				var sDate = createDate(startDate);
-				var eDate = createDate(endDate);
-				if(sDate<=eDate){
-					var id=$("#emp_id").val();
-					console.log("Id: "+id);
-					console.log(startDate + " " + endDate);
-					var queryString = "?startDate="+startDate+"&endDate="+endDate;
-					if(id!=""){
-						if(id.match(empRegex)){
-							get_url = get_url + "/"+ id + "/shifts/"+queryString;
-						}
-						else{
-							alert("Employee Id format EMP-XXXX");
-							$("#reset_btn").click();
-							return;
-						}
-					}
-					else{
-						get_url =get_url + "/shifts"+queryString;
-					}
-					$.ajax(
-						{
-							url : get_url,
-							type: "get"
-						}
-					)
-					.done(function(response)
-						{ 
-							var jsonObject = response;
-							if(!$.isEmptyObject(jsonObject)){
-								var strHtml = "<thead><tr><th scope='col'>Emp Id</th><th scope='col'>Working Date</th><th scope='col'>Shift Id</th><th scope='col'>Start Time</th><th scope='col'>End Time</th><th scope='col'>Action</th></tr><thead>";
-								strHtml += "<tbody>"
-								$(jsonObject).each(function()
-									{
-										var row = $(this)[0];
-										var empId = row["empId"];
-										var shifts = row["shifts"];
-										
-										$.each(shifts, function(k,v) {
-										    $.each(v, function(item) {
-										      	var shift = v[item];
-										      	console.log(k +"-"+shift);
-										      	shiftEndTime = shift["shiftEndTime"];
-										      	if(shiftEndTime===null)
-										      		shiftEndTime = ""
-										      	var id = empId + ":"+shift["shiftId"]+":"+k;
-										    	strHtml += '<tr><td>'+empId+'</td><td>'+k+'</td><td>'+shift["shiftId"]+'</td><td>'+shift["shiftStartTime"]+'</td><td>'+shiftEndTime+
-										    				'</td><td><button class=\'btn btn-warning\' onclick="removeShift(\''+id+'\')"">Remove</button></td</tr>';
-										    });
-										}); 
-									}
-								);
-								strHtml += "</tbody>"
-						 		$('#table_id').html(strHtml);
+		.submit(function(event){
+			event.preventDefault(); //prevent default action 
+			var get_url = $(this).attr("action"); //get form action url
+			var request_method = $(this).attr("method"); //get form GET/POST method
+			var id=$("#emp_id").val();
+			var startDate = $('#s_datepicker').val();
+			var endDate = $('#e_datepicker').val();
+			
+			if(isDateFormatValid(startDate) && 
+					isDateFormatValid(endDate)){
+				try{
+					var sDate = createDate(startDate);
+					var eDate = createDate(endDate);
+					if(sDate<=eDate){
+						var id=$("#emp_id").val();
+						console.log("Id: "+id);
+						console.log(startDate + " " + endDate);
+						var queryString = "?startDate="+startDate+"&endDate="+endDate;
+						if(id!=""){
+							if(id.match(empRegex)){
+								get_url = get_url + "/"+ id + "/shifts/"+queryString;
 							}
 							else{
-								alert("No records for the date range!");
+								alert("Employee Id format EMP-XXXX");
 								$("#reset_btn").click();
-								$('#table_id').html("");
+								return;
 							}
 						}
-					)
-					.fail (function(jqxhr, textStatus, errorThrown)  
-						{
-							alert("Error: " + jqxhr.statusText + " : " + jqxhr.responseText) ;
+						else{
+							get_url =get_url + "/shifts"+queryString;
 						}
-					);					
-				}
-				else{
-					alert("Start date must be before than end date!");
+						$.ajax(
+							{
+								url : get_url,
+								type: "get"
+							}
+						)
+						.done(function(response)
+							{ 
+								var jsonObject = response;
+								if(!$.isEmptyObject(jsonObject)){
+									var strHtml = "<thead><tr><th scope='col'>Emp Id</th><th scope='col'>Working Date</th><th scope='col'>Shift Id</th><th scope='col'>Start Time</th><th scope='col'>End Time</th><th scope='col'>Update</th><th scope='col'>Remove</th></tr><thead>";
+									strHtml += "<tbody>"
+									$(jsonObject).each(function()
+										{
+											var row = $(this)[0];
+											var empId = row["empId"];
+											var shifts = row["shifts"];
+											
+											$.each(shifts, function(k,v) {
+											    $.each(v, function(item) {
+											      	var shift = v[item];
+											      	console.log(k +"-"+shift);
+											      	var shiftEndTime = convertToHHMM(shift["shiftEndTime"]);
+											      	var shiftStartTime = convertToHHMM(shift["shiftStartTime"]);
+											      	var shiftId = shift["shiftId"];
+											      	var id = empId + "_" + shiftId + "_" + k + "_" + shiftStartTime + "_" + shiftEndTime;
+											    	strHtml += '<tr>'+
+												    	            '<td>'+empId+'</td>'+
+												    	            '<td>'+k+'</td>'+
+												    	            '<td><input id =\'si_'+id+'\' type=\'text\' class=\'form-control\' value=\''+shiftId+'\' style=\'width: 50px;\'></td>'+
+												    				'<td><input id =\'st_'+id+'\' type=\'text\' class=\'form-control\' value=\''+shiftStartTime+'\' style=\'width: 80px;\'></td>'+
+												    				'<td><input id =\'et_'+id+'\' type=\'text\' class=\'form-control\' value=\''+shiftEndTime+'\' style=\'width: 80px;\'></td>'+
+												    				'<td><button class=\'btn btn-warning\' onclick="updateShift(\''+id+'\')"">Update</button></td>'+
+												    				'<td><button class=\'btn btn-warning\' onclick="removeShift(\''+id+'\')"">Remove</button></td>'+
+											    				'</tr>';
+											    });
+											}); 
+										}
+									);
+									strHtml += "</tbody>"
+							 		$('#table_id').html(strHtml);
+								}
+								else{
+									alert("No records for the date range!");
+									$("#reset_btn").click();
+									$('#table_id').html("");
+								}
+							}
+						)
+						.fail (function(jqxhr, textStatus, errorThrown)  
+							{
+								alert("Error: " + jqxhr.statusText + " : " + jqxhr.responseText) ;
+							}
+						);					
+					}
+					else{
+						alert("Start date must be before than end date!");
+						$("#reset_btn").click();
+					}
+				} 
+				catch(err){
+					alert(err);
 					$("#reset_btn").click();
 				}
-			} 
-			catch(err){
-				alert(err);
+			}
+			else{
+				alert("start-date and end-date cannot be empty!")
 				$("#reset_btn").click();
+				$('#table_id').html("");
 			}
 		}
-		else{
-			alert("start-date and end-date cannot be empty!")
-			$("#reset_btn").click();
-			$('#table_id').html("");
+	);
+	
+	$('document')
+		.ready(function () {
+			$.ajax(
+				{
+					url : "/capstone/shifts",
+					type: "get",
+				}
+			)
+			.done(function(response)
+				{ 
+					var jsonObject = response;
+					shiftIds.length = 0;
+					$(jsonObject).each(function()
+						{
+							var row = $(this)[0];
+							shiftIds.push(parseInt(row["shiftId"]));
+						}
+					);
+				}
+			)
+			.fail (function(jqxhr, textStatus, errorThrown)  
+				{
+					alert("Error: " + jqxhr.statusText + " : " + jqxhr.responseText) ;
+				}
+			);
 		}
-	}
-);
-
+	);
 	</script>
 </html>

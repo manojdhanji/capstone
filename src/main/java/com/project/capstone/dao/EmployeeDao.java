@@ -56,6 +56,7 @@ public class EmployeeDao extends AbstractDao {
 			"select * from EMP order by emp_id";
 	private static final String DELETE_EMP_SHIFT = "delete from emp_shift where emp_id = ? and shift_id = ? and working_date = ?";
 	private static final String DELETE_EMP = "delete from emp where emp_id = ?";
+	private static final String UPDATE_EMP_SHIFT = "update emp_shift set shift_id = ?, clock_in_time = ?, clock_out_time = ? where emp_id = ? and shift_id = ? and working_date = ?";
 	@Autowired
 	@Qualifier("oracleDataSource")
     private DataSource oracleDataSource;
@@ -314,5 +315,13 @@ public class EmployeeDao extends AbstractDao {
 	public int deleteEmployee(String id) {
 		return this.jdbcTemplate.update(DELETE_EMP,
     			new Object[] {id});
+	}
+    @Transactional(transactionManager="oracleTransactionManager")
+	public int updateEmployeeShift(String id, 
+									int shiftId, 
+										LocalDate workingDate, 
+											Shift newShift) {
+		return this.jdbcTemplate.update(UPDATE_EMP_SHIFT, 
+				new Object[] {newShift.getShiftId(), DateTimeUtils.getLocalTime(newShift.getShiftStartTime()), DateTimeUtils.getLocalTime(newShift.getShiftEndTime()), id, shiftId, DateTimeUtils.convertLocalDateToDate(workingDate)});
 	}
 }
