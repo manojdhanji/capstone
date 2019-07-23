@@ -168,6 +168,38 @@ public class AppController {
 				HttpStatus.EXPECTATION_FAILED,
 					"Input data must be valid", null);
 	}
+	
+	@PutMapping(path="/capstone/employees/{id}")
+	public String updateEmployee(
+		@PathVariable ("id") String id,
+			@RequestParam("firstName") String firstName,
+				@RequestParam("lastName") String lastName,
+					@RequestParam("email") String email) {
+		if(!Constants.EMP_ID_PATTERN_MATCH.test(id)) 
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND, "Employee Id format required: EMP-XXXX", null); 
+		try {
+			if(StringUtils.isNotBlank(firstName) &&
+					StringUtils.isNotBlank(lastName) &&
+						StringUtils.isNotBlank(email) && Constants.EMAIL_REGEX.matcher(email).matches()) {
+				
+				int rowUpdated = employeeService.updateEmployee(id, firstName, lastName, email);
+				if(rowUpdated>0)
+					return MessageFormat.format("Employee {0} updated", id);
+				else
+					return MessageFormat.format("Employee {0} could not be found", id);
+			}
+			else {
+				throw new IllegalArgumentException("Please check update parameters");
+			}
+		}
+		catch(IllegalArgumentException ie) {
+			throw new ResponseStatusException(
+					HttpStatus.FAILED_DEPENDENCY, ie.getMessage(), ie);
+		}
+
+	}
+	
 	@GetMapping(path="/capstone/employees/{id}")
 	public Employee getEmployee(@PathVariable("id") String id) {
 		Optional<Employee> optEmployee = Optional.<Employee>empty();

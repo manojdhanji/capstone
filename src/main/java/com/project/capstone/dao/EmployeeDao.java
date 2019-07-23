@@ -324,4 +324,11 @@ public class EmployeeDao extends AbstractDao {
 		return this.jdbcTemplate.update(UPDATE_EMP_SHIFT, 
 				new Object[] {newShift.getShiftId(), DateTimeUtils.getLocalTime(newShift.getShiftStartTime()), DateTimeUtils.getLocalTime(newShift.getShiftEndTime()), id, shiftId, DateTimeUtils.convertLocalDateToDate(workingDate)});
 	}
+    @Transactional(transactionManager="oracleTransactionManager")
+	public int updateEmployee(String id, 
+								String firstName, 
+									String lastName, 
+										String email) {
+		return this.jdbcTemplate.update("update emp set first_name = ?, last_name = ?, email = ? where emp_id = ?", new Object[] {firstName,lastName,email,id});
+	}
 }

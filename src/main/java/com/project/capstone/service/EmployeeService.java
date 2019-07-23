@@ -55,4 +55,10 @@ public class EmployeeService {
 		return employeeDao.updateEmployeeShift(id,shiftId,workingDate,newShift);
 		
 	}
+	public int updateEmployee(String id, 
+								String firstName, 
+									String lastName, 
+										String email) {
+		return employeeDao.updateEmployee(id,firstName,lastName,email);
+	}
 }

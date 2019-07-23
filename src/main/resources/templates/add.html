@@ -17,7 +17,7 @@
 	</head>
 	<body>
 		<h2>Add Employee</h2>
-		<form class="form-inline" action="/capstone/employees" method="post">
+		<form class="form-inline" action="/capstone/employees" method="post" id="my_form">
 			<div class='form-group' style='margin-top: 50px;'>
 				<label for="emp_id">Emp Id:</label> 
 					<input type="text" class="form-control" name="id" id="emp_id" value="" placeholder="EMP-XXXX" style='width: 100px;'>
@@ -27,12 +27,56 @@
 					<input type="text" class="form-control" name="lastName" id="last_name" value="">
 				<label for="email">Email:</label> 
 					<input type="text" class="form-control" name="email" id="email" value="" placeholder="name@example.com">
-			  <input class="btn btn-primary"type="submit" value="Add Employee">
-			  <input type="reset" class="btn btn-secondary" value="Clear" />
+			  <input class="btn btn-primary"type="submit" value="Add Employee" id="post_btn">
+			  <input type="reset" class="btn btn-secondary" value="Clear" id="reset_btn"/>
 		  </div>
 		</form> 
 		<script>
-		
+		var emailRegex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+		$("#my_form")
+			.submit(function(event){
+				event.preventDefault(); //prevent default action 
+				var post_url = $(this).attr("action"); //get form action url
+				var request_method = $(this).attr("method"); //get form GET/POST method
+				var id=$("#emp_id").val();
+				var firstName = $("#first_name").val();
+				var lastName = $("#last_name").val();
+				var email = $("#email").val();
+				var empRegex = new RegExp(/^EMP-\d{4}$/);
+				if(!id.match(empRegex)){
+					alert("Employee Id format EMP-XXXX");
+					return;
+				}	
+				if(firstName===""){
+					alert("First name cannot be empty")
+					return;
+				}
+				if(lastName===""){
+					alert("Last name cannot be empty")
+					return;
+				}
+				if(!email.match(emailRegex)){
+					alert("Invalid email format")
+					return;
+				}
+				$.ajax(
+					{
+						url : post_url,
+						type: request_method,
+						data : {id:id,firstName:firstName,lastName:lastName,email:email}
+					}
+				)
+				.done(function(response){ //
+							alert(response);
+						}
+				)
+				.fail (function(jqxhr, textStatus, errorThrown) {
+						alert("Error: " + jqxhr.statusText + " : " + jqxhr.responseText) ;
+						$("#reset_btn").click();
+					}
+				);
+			}
+		);
 		</script>
 	</body>
 </html>

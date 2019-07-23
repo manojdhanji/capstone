@@ -31,6 +31,55 @@
 		</div>
 	</body>
 	<script>
+	var emailRegex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+	
+	function updateEmployee(id){
+		var tokens = id.split("_");
+		var empId = tokens[0];
+		var firstName = tokens[1];
+		var lastName = tokens[2];
+		var email = tokens[3];
+		var newFirstName = $("#fn_"+empId).val();
+		var newLastName = $("#ln_"+empId).val();
+		var newEmail = $("#em_"+empId).val();
+		if(newFirstName===""){
+			alert("First name cannot be empty")
+			$("#fn_"+empId).val(firstName);
+			return;
+		}
+		if(newLastName===""){
+			alert("Last name cannot be empty")
+			$("#ln_"+empId).val(lastName);
+			return;
+		}
+		if(!newEmail.match(emailRegex)){
+			alert("Invalid email format")
+			$("#em_"+empId).val(email);
+			return;
+		}
+		var r = confirm("Are you sure you want to update this employee?");
+		if(r){
+			$.ajax(
+				{
+						url : "/capstone/employees/"+empId,
+						type: "put",
+						data : {id:empId,firstName:newFirstName,lastName:newLastName,email:newEmail}
+					}
+				)
+				.done(function(response)
+					{ //
+						alert(response);
+						$("#get_btn").click();
+					}
+				)
+				.fail (function(jqxhr, textStatus, errorThrown) {
+						alert("Error: " + jqxhr.statusText + " : " + jqxhr.responseText) ;
+						$("#reset_btn").click();
+					}
+				);			
+		}
+	}
+	
 	function removeEmployee(id){
 		var r = confirm("Remove employee "+ id);
 		if(r){
@@ -82,17 +131,22 @@
 			.done(function(response)
 				{ 
 					var jsonObject = response;
-					var strHtml = "<thead><tr><th scope='col'>Emp Id</th><th scope='col'>First Name</th><th scope='col'>Last Name</th><th scope='col'>Email</th><th scope='col'>Action</th></tr></thead>";
+					var strHtml = "<thead><tr><th scope='col'>Emp Id</th><th scope='col'>First Name</th><th scope='col'>Last Name</th><th scope='col'>Email</th><th scope='col'>Update</th><th scope='col'>Remove</th></tr></thead>";
 					strHtml += "<tbody>"
 					$(jsonObject).each(function()
 						{
 							var row = $(this)[0];
 							var empId = row["empId"];
+							var firstName = row["firstName"];
+							var lastName = row["lastName"];
+							var email = row["email"];
+							var id = empId + "_" + firstName + "_" + lastName + "_" + email;
 							strHtml += '<tr>'+
 										'<td>'+empId+'</td>'+
-										'<td>'+row["firstName"]+'</td>'+
-										'<td>'+row["lastName"]+'</td>'+
-										'<td>'+row["email"]+'</td>'+
+										'<td><input id =\'fn_'+empId+'\' type=\'text\' class=\'form-control\' value=\''+firstName+'\' style=\'width: 150px;\'></td></td>'+
+										'<td><input id =\'ln_'+empId+'\' type=\'text\' class=\'form-control\' value=\''+lastName+'\' style=\'width: 150px;\'></td></td>'+
+										'<td><input id =\'em_'+empId+'\' type=\'text\' class=\'form-control\' value=\''+email+'\' style=\'width: 250px;\'></td></td>'+
+										'<td><button class=\'btn btn-warning\' onclick="updateEmployee(\''+id+'\')">Update</button></td>'+
 										'<td><button class=\'btn btn-warning\' onclick="removeEmployee(\''+empId+'\')">Remove</button></td>'+
 									   '</tr>';
 						}

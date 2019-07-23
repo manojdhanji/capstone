@@ -89,7 +89,7 @@
 			$("#et_"+id).val(shiftEndTime);
 			return;
 		}
-		var r = confirm("Do you wish to update this shift?");
+		var r = confirm("Are you sure you want to update this shift?");
 		if(r){
 			$.ajax(
 					{
@@ -130,7 +130,7 @@
 		var shiftId = array[1];
 		var workingDate = array[2];
 		workingDate = workingDate.replace("-","").replace("-","");
-		var r = confirm("Do you wish to remove this shift?");
+		var r = confirm("Are you sure you want to remove this shift?");
 		if(r==true){
 			$.ajax(
 				{
