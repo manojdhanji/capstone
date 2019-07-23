@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -321,14 +322,20 @@ public class EmployeeDao extends AbstractDao {
 									int shiftId, 
 										LocalDate workingDate, 
 											Shift newShift) {
-		return this.jdbcTemplate.update(UPDATE_EMP_SHIFT, 
+		try {
+			return this.jdbcTemplate.update(UPDATE_EMP_SHIFT, 
 				new Object[] {newShift.getShiftId(), DateTimeUtils.getLocalTime(newShift.getShiftStartTime()), DateTimeUtils.getLocalTime(newShift.getShiftEndTime()), id, shiftId, DateTimeUtils.convertLocalDateToDate(workingDate)});
+		}
+		catch(Exception e) {
+			throw new DuplicateKeyException(
+						"A shift with the same working day for the same employee already exists", e);
+		}
 	}
     @Transactional(transactionManager="oracleTransactionManager")
 	public int updateEmployee(String id, 
 								String firstName, 
 									String lastName, 
 										String email) {
-		return this.jdbcTemplate.update("update emp set first_name = ?, last_name = ?, email = ? where emp_id = ?", new Object[] {firstName,lastName,email,id});
+    	return this.jdbcTemplate.update("update emp set first_name = ?, last_name = ?, email = ? where emp_id = ?", new Object[] {firstName,lastName,email,id});
 	}
 }

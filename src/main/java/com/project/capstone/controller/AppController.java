@@ -1,6 +1,5 @@
 package com.project.capstone.controller;
 
-import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -121,22 +120,16 @@ public class AppController {
 	}
 	
 	@DeleteMapping(path="/capstone/employees/{id}")
-	public String deleteEmployee(@PathVariable ("id") String id) {
+	public int deleteEmployee(@PathVariable ("id") String id) {
 		if(!Constants.EMP_ID_PATTERN_MATCH.test(id)){
 			throw new ResponseStatusException(
 				HttpStatus.NOT_FOUND, "Employee Id format required: EMP-XXXX", null); 
 		}
-		int rowDeleted = 
-		employeeService.deleteEmployee(id);
-		if(rowDeleted>0)
-			return id;
-		else
-			return MessageFormat.format("Employee with {0} not found", id);
+		return employeeService.deleteEmployee(id);
 	}
 	
-	
 	@PostMapping(path="/capstone/employees")
-	public boolean addEmployee(
+	public int addEmployee(
 			@RequestParam("id") String id,
 				@RequestParam("firstName") String firstName,
 					@RequestParam("lastName") String lastName,
@@ -151,7 +144,7 @@ public class AppController {
 			e.setLastName(lastName);
 			e.setEmail(email);
 			try {
-				return employeeService.insertEmployee(e)!=0?Boolean.TRUE:Boolean.FALSE;
+				return employeeService.insertEmployee(e);
 			}
 			catch(AddEmployeeException ae) {
 				throw new ResponseStatusException(
@@ -170,7 +163,7 @@ public class AppController {
 	}
 	
 	@PutMapping(path="/capstone/employees/{id}")
-	public String updateEmployee(
+	public int updateEmployee(
 		@PathVariable ("id") String id,
 			@RequestParam("firstName") String firstName,
 				@RequestParam("lastName") String lastName,
@@ -183,11 +176,7 @@ public class AppController {
 					StringUtils.isNotBlank(lastName) &&
 						StringUtils.isNotBlank(email) && Constants.EMAIL_REGEX.matcher(email).matches()) {
 				
-				int rowUpdated = employeeService.updateEmployee(id, firstName, lastName, email);
-				if(rowUpdated>0)
-					return MessageFormat.format("Employee {0} updated", id);
-				else
-					return MessageFormat.format("Employee {0} could not be found", id);
+				return employeeService.updateEmployee(id, firstName, lastName, email);
 			}
 			else {
 				throw new IllegalArgumentException("Please check update parameters");
@@ -197,7 +186,6 @@ public class AppController {
 			throw new ResponseStatusException(
 					HttpStatus.FAILED_DEPENDENCY, ie.getMessage(), ie);
 		}
-
 	}
 	
 	@GetMapping(path="/capstone/employees/{id}")
@@ -250,7 +238,7 @@ public class AppController {
 		}
 	}
 	@PutMapping( "/capstone/employees/{id}/shifts/{shiftId}")
-	public String updateEmployeeShift(
+	public int updateEmployeeShift(
 			@PathVariable("id") String id,
 				@PathVariable("shiftId") int shiftId,
 					@RequestParam("newShiftId") int newShiftId,
@@ -272,12 +260,7 @@ public class AppController {
 			Shift newShift  = new Shift(newShiftId,startTime,endTime);
 			if(ShiftUtils.isValid(newShift, shiftService.findShifts()))
 			{
-				int rowUpdated = employeeService.updateEmployeeShift(id,shiftId,date,newShift);
-				if(rowUpdated>0) {
-					return MessageFormat.format("Shift {0} for date {1} for employee {2} has been updated", new Object[] {shiftId,date.format(DateTimeFormatter.ISO_LOCAL_DATE),id});
-				}
-				else
-					return MessageFormat.format("Could not find shift {0} for date {1} for employee {2}", new Object[] {shiftId,date.format(DateTimeFormatter.ISO_LOCAL_DATE),id});
+				return employeeService.updateEmployeeShift(id,shiftId,date,newShift);
 			}
 			else
 				throw new IllegalArgumentException("Invalid new shift - shift id and times do not agree");
@@ -290,9 +273,14 @@ public class AppController {
 			throw new ResponseStatusException(
 					HttpStatus.FAILED_DEPENDENCY, ie.getMessage(), ie);
 		}
+		catch(Exception de) {
+			throw new ResponseStatusException(
+					HttpStatus.CONFLICT,
+						"A shift with the same working day for the same employee already exists", de);
+		}
 	}
 	@DeleteMapping( "/capstone/employees/{id}/shifts/{shiftId}")
-	public String deleteEmployeeShift(
+	public int deleteEmployeeShift(
 			@PathVariable("id") String id,
 				@PathVariable("shiftId") int shiftId,
 					@RequestParam("workingDate") String workingDate) {
@@ -302,12 +290,7 @@ public class AppController {
 					HttpStatus.NOT_FOUND, "Employee Id format required: EMP-XXXX", null); 
 			if(shiftService.findShifts().stream().noneMatch(s->s.getShiftId()==shiftId))
 				throw new IllegalArgumentException("Invalid shift Id");
-			int rowDeleted = employeeService.deleteEmployeeShift(id,shiftId,LocalDate.parse(workingDate, DateTimeFormatter.BASIC_ISO_DATE));
-			if(rowDeleted>0) {
-				return id;
-			}
-			else
-				return MessageFormat.format("Could not find employee shift {0} for {1}", new Object[] {shiftId,workingDate});
+			return employeeService.deleteEmployeeShift(id,shiftId,LocalDate.parse(workingDate, DateTimeFormatter.BASIC_ISO_DATE));
 		}
 		catch(DateTimeParseException dtpe) {
 			throw new ResponseStatusException(

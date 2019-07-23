@@ -100,7 +100,11 @@
 				)
 				.done(function(response)
 					{ //
-						alert(response);
+						var rowUpdated = parseInt(response);
+						if(rowUpdated===0)
+							alert("Could not find "+shiftId+" for "+workingDate+" for employee "+empId);
+						else
+							alert("Shift "+shiftId+" for "+workingDate+" for employee "+empId+" has been updated");
 						$("#get_btn").click();
 					}
 				)
@@ -141,7 +145,11 @@
 			)
 			.done(function(response)
 				{ 
-					alert("Selected shift for "+ response + " has been deleted");
+					var rowUpdated = parseInt(response);
+					if(rowUpdated===0)
+						alert("Could not find "+shiftId+" for "+workingDate+" for employee "+empId);
+					else
+						alert("Shift "+shiftId+" for "+workingDate+" for employee "+empId+" has been deleted");
 					$("#get_btn").click();
 				}
 			)

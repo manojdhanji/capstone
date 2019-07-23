@@ -68,7 +68,11 @@
 				)
 				.done(function(response)
 					{ //
-						alert(response);
+						var rowUpdated = parseInt(response);
+						if(rowUpdated===1)
+							alert("Employee '"+empId+"' updated");
+						else
+							alert("Employee '"+empId+"' could not be updated");
 						$("#get_btn").click();
 					}
 				)
@@ -81,7 +85,7 @@
 	}
 	
 	function removeEmployee(id){
-		var r = confirm("Remove employee "+ id);
+		var r = confirm("Remove employee "+ id + "?");
 		if(r){
 			$.ajax(
 					{
@@ -92,7 +96,11 @@
 				)
 				.done(function(response)
 					{ //
-						alert(response);
+						var rowUpdated = parseInt(response);
+						if(rowUpdated===1)
+							alert("Employee '"+id+"' removed");
+						else
+							alert("Employee '"+id+"' could not be removed");
 						$("#get_btn").click();
 					}
 				)

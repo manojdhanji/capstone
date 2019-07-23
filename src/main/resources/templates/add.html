@@ -66,8 +66,13 @@
 						data : {id:id,firstName:firstName,lastName:lastName,email:email}
 					}
 				)
-				.done(function(response){ //
-							alert(response);
+				.done(function(response)
+						{ //
+							var rowInserted = parseInt(response);
+							if(rowInserted>0)
+								alert("Employee '"+id+"' created");
+							else
+								alert("Employee could not be created");
 						}
 				)
 				.fail (function(jqxhr, textStatus, errorThrown) {
