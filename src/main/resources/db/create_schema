@@ -6,6 +6,6 @@ CREATE USER capstone IDENTIFIED BY capstone;
 GRANT CONNECT, RESOURCE, DBA TO capstone;
 
 --grant privileges--
-GRANT CREATE SESSION GRANT ALL PRIVILEGE TO books_admin;
+GRANT CREATE SESSION GRANT ALL PRIVILEGE TO capstone;
 
 disconnect;
