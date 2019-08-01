@@ -1,0 +1,11 @@
+connect / as sysdba
+
+CREATE USER capstone IDENTIFIED BY capstone;
+
+--grant roles--
+GRANT CONNECT, RESOURCE, DBA TO capstone;
+
+--grant privileges--
+GRANT CREATE SESSION GRANT ALL PRIVILEGE TO books_admin;
+
+disconnect;

@@ -84,7 +84,7 @@ public class AppController {
 		}
 		catch(IllegalArgumentException ie) {
 			throw new ResponseStatusException(
-					HttpStatus.FAILED_DEPENDENCY, ie.getMessage(), ie);
+					HttpStatus.EXPECTATION_FAILED, ie.getMessage(), ie);
 		}
 	}
 	
@@ -115,7 +115,7 @@ public class AppController {
 		}
 		catch(IllegalArgumentException ie) {
 			throw new ResponseStatusException(
-					HttpStatus.FAILED_DEPENDENCY, ie.getMessage(), ie);
+				HttpStatus.EXPECTATION_FAILED, ie.getMessage(), ie);
 		}
 	}
 	
@@ -123,7 +123,7 @@ public class AppController {
 	public int deleteEmployee(@PathVariable ("id") String id) {
 		if(!Constants.EMP_ID_PATTERN_MATCH.test(id)){
 			throw new ResponseStatusException(
-				HttpStatus.NOT_FOUND, "Employee Id format required: EMP-XXXX", null); 
+				HttpStatus.EXPECTATION_FAILED, "Employee Id format required: EMP-XXXX", null); 
 		}
 		return employeeService.deleteEmployee(id);
 	}
@@ -170,7 +170,7 @@ public class AppController {
 					@RequestParam("email") String email) {
 		if(!Constants.EMP_ID_PATTERN_MATCH.test(id)) 
 			throw new ResponseStatusException(
-					HttpStatus.NOT_FOUND, "Employee Id format required: EMP-XXXX", null); 
+					HttpStatus.EXPECTATION_FAILED, "Employee Id format required: EMP-XXXX", null); 
 		try {
 			if(StringUtils.isNotBlank(firstName) &&
 					StringUtils.isNotBlank(lastName) &&
@@ -184,7 +184,7 @@ public class AppController {
 		}
 		catch(IllegalArgumentException ie) {
 			throw new ResponseStatusException(
-					HttpStatus.FAILED_DEPENDENCY, ie.getMessage(), ie);
+					HttpStatus.EXPECTATION_FAILED, ie.getMessage(), ie);
 		}
 	}
 	
@@ -193,7 +193,7 @@ public class AppController {
 		Optional<Employee> optEmployee = Optional.<Employee>empty();
 		if(!Constants.EMP_ID_PATTERN_MATCH.test(id)) 
 			throw new ResponseStatusException(
-					HttpStatus.NOT_FOUND, "Employee Id format required: EMP-XXXX", null); 
+					HttpStatus.EXPECTATION_FAILED, "Employee Id format required: EMP-XXXX", null); 
 		optEmployee = employeeService.findEmployee(id);
 		if(optEmployee.isPresent()) {
 			return optEmployee.get();
@@ -211,7 +211,7 @@ public class AppController {
 			Optional<Employee> optEmployee = Optional.<Employee>empty();
 			if(!Constants.EMP_ID_PATTERN_MATCH.test(id)) 
 				throw new ResponseStatusException(
-					HttpStatus.NOT_FOUND, "Employee Id format required: EMP-XXXX", null); 
+					HttpStatus.EXPECTATION_FAILED, "Employee Id format required: EMP-XXXX", null); 
 			log.info("id: {} startDate: {} endDate: {}",id, startDate, optEndDate);
 			LocalDate start = LocalDate.parse(startDate, DateTimeFormatter.BASIC_ISO_DATE);
 			if(optEndDate.isPresent()) {
@@ -248,7 +248,7 @@ public class AppController {
 		try {
 			if(!Constants.EMP_ID_PATTERN_MATCH.test(id)) 
 				throw new ResponseStatusException(
-					HttpStatus.NOT_FOUND, "Employee Id format required: EMP-XXXX", null);
+					HttpStatus.EXPECTATION_FAILED, "Employee Id format required: EMP-XXXX", null);
 			if(shiftService.findShifts().stream().noneMatch(s->s.getShiftId()==shiftId))
 				throw new IllegalArgumentException("Invalid shift Id");
 			if(shiftService.findShifts().stream().noneMatch(s->s.getShiftId()==newShiftId))
@@ -287,7 +287,7 @@ public class AppController {
 		try {
 			if(!Constants.EMP_ID_PATTERN_MATCH.test(id)) 
 				throw new ResponseStatusException(
-					HttpStatus.NOT_FOUND, "Employee Id format required: EMP-XXXX", null); 
+					HttpStatus.EXPECTATION_FAILED, "Employee Id format required: EMP-XXXX", null); 
 			if(shiftService.findShifts().stream().noneMatch(s->s.getShiftId()==shiftId))
 				throw new IllegalArgumentException("Invalid shift Id");
 			return employeeService.deleteEmployeeShift(id,shiftId,LocalDate.parse(workingDate, DateTimeFormatter.BASIC_ISO_DATE));

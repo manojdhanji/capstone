@@ -120,7 +120,8 @@ public class Employee implements Serializable {
 			  .append(", email: ")
 			  .append(email)
 			  .append(", shifts")
-			  .append(shifts);
+			  .append(shifts)
+			  .append("}");
 		return buffer.toString();
 	}
 }

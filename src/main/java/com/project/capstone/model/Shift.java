@@ -78,7 +78,6 @@ public class Shift implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Shift [shiftId=" + shiftId + ", shiftStartTime=" + shiftStartTime + ", shiftEndTime=" + shiftEndTime
-				+ "]";
+		return "Shift: {shiftId:" + shiftId + ", shiftStartTime:" + shiftStartTime + ", shiftEndTime:" + shiftEndTime + "}";
 	}
 }
