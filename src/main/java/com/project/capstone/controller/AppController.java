@@ -60,7 +60,8 @@ public class AppController {
 		 return shiftService.findClosestShift().getShiftId();
 		}
 		catch(Exception e) {
-			return -1;
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND, e.getMessage(), e);
 		}
 	}
 	
